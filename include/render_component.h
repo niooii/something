@@ -4,13 +4,11 @@
 
 class RenderComponent {
 public:
-    RenderComponent();
-    ~RenderComponent();
+    virtual void Draw() = 0;
 
-    void Draw();
-
-private:
-
+protected:
+    void DrawPixel(int x, int y, int z);
+    void DrawTexture(const char* texture_id);
 };
 
 

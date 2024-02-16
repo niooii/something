@@ -31,3 +31,14 @@ add_executable(SDLGameFramework main.cpp
         include/render_component.cpp
         include/render_component.h
         include/result.h)
+
+target_link_libraries(SDLGameFramework
+        ${SDL2_LIBRARIES}
+        ${SDL2_IMAGE_LIBRARIES}
+        ${SDL_MIXER_LIBRARIES}
+        ${SDL_NET_LIBRARIES}
+        ${SDL_TTF_LIBRARIES}
+
+        # Manually link SDL2_gpu library
+        "/usr/lib/libSDL2_gpu.so"
+)

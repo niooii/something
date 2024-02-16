@@ -1,18 +1,23 @@
 #ifndef SDLGAMEFRAMEWORK_APP_H
 #define SDLGAMEFRAMEWORK_APP_H
 
-#include <expected>
-#include <vector>
-#include <SDL2/SDL.h>
 #include "render_component.h"
+
+#include <SDL2/SDL.h>
+
+#include <vector>
+#include <map>
+#include <expected>
 
 class App {
     enum AppError {
         CouldNotLoadTexture,
+        TextureIdNonexistent
     };
 public:
     App();
     ~App();
+    std::expected<void, AppError> AddTexture(const char* texture_id, const char* path);
     std::expected<void, AppError> AddRenderComponent();
 
     void DrawFrame();
@@ -24,8 +29,9 @@ private:
     std::vector<RenderComponent> render_components_;
 
     // SDL2 internals
-    SDL_Window* window;
-    SDL_Renderer* renderer;
+    SDL_Window* window_;
+    SDL_Renderer* renderer_;
+    std::map<const char*, SDL_Texture*> texture_map_;
 };
 
 
