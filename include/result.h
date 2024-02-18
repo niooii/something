@@ -1,8 +1,0 @@
-//
-// Created by niooi on 2/16/24.
-//
-
-#ifndef SDLGAMEFRAMEWORK_RESULT_H
-#define SDLGAMEFRAMEWORK_RESULT_H
-
-#endif //SDLGAMEFRAMEWORK_RESULT_H

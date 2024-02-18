@@ -1,7 +1,7 @@
 #ifndef SDLGAMEFRAMEWORK_APP_H
 #define SDLGAMEFRAMEWORK_APP_H
 
-#include "render_component.h"
+#include "render/render_component.h"
 
 #include <SDL2/SDL.h>
 
