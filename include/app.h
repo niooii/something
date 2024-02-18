@@ -3,7 +3,7 @@
 
 #include "render/render_component.h"
 
-#include <SDL2/SDL.h>
+#include "platform/SDL2_includes.h"
 
 #include <vector>
 #include <map>

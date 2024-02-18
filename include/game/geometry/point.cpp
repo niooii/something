@@ -14,13 +14,7 @@ namespace Geometry
     {
     }
 
-    float Point::distance(const Point &other)
+    float Point::distance(const Point& other)
     {
-
-    }
-
-    Math::Vec2 Point::vector_to(const Point &other)
-    {
-        return Math::Vec2{};
     }
 }

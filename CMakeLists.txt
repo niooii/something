@@ -4,12 +4,17 @@ project(horse)
 set(CMAKE_CXX_STANDARD 23)
 
 if(WIN32)
+    set(SDL2_INSTALL "E:\\libs\\SDL2-2.28.5")
+    set(SDL2_image_INSTALL "E:\\libs\\SDL2_image-2.8.2")
+    set(SDL2_mixer_INSTALL "E:\\libs\\SDL2_mixer-2.8.0")
+    set(SDL2_ttf_INSTALL "E:\\libs\\SDL2_ttf-2.22.0")
+    set(SDL2_net_INSTALL "E:\\libs\\SDL2_net-2.2.0")
     # set directory accordingly
-    set(SDL2_DIR "E:\\libs\\SDL2-2.28.5\\cmake")
-    set(SDL2_image_DIR "E:\\libs\\SDL2_image-2.8.2\\cmake")
-    set(SDL2_mixer_DIR "E:\\libs\\SDL2_mixer-2.8.0\\cmake")
-    set(SDL2_ttf_DIR "E:\\libs\\SDL2_ttf-2.22.0\\cmake")
-    set(SDL2_net_DIR "E:\\libs\\SDL2_net-2.2.0\\cmake")
+    set(SDL2_DIR "${SDL2_INSTALL}\\cmake")
+    set(SDL2_image_DIR "${SDL2_image_INSTALL}\\cmake")
+    set(SDL2_mixer_DIR "${SDL2_mixer_INSTALL}\\cmake")
+    set(SDL2_ttf_DIR "${SDL2_ttf_INSTALL}\\cmake")
+    set(SDL2_net_DIR "${SDL2_net_INSTALL}\\cmake")
 endif ()
 
 find_package(SDL2 REQUIRED)
@@ -20,15 +25,28 @@ find_package(SDL2_net REQUIRED)
 # manually get the include path for SDL_gpu
 
 # Include directories
-include_directories(
-        #my own shit
-        "include"
-        ${SDL2_INCLUDE_DIRS}
-        ${SDL2_IMAGE_INCLUDE_PATH}
-        ${SDL2_MIXER_INCLUDE_DIRS}
-        ${SDL2_NET_INCLUDE_DIRS}
-        ${SDL2_TTF_INCLUDE_DIRS}
-)
+if(WIN32)
+    include_directories(
+            #my own shit
+            "include"
+            ${SDL2_INCLUDE_DIRS}
+            "${SDL2_image_INSTALL}\\include"
+            "${SDL2_mixer_INSTALL}\\include"
+            "${SDL2_net_INSTALL}\\include"
+            "${SDL2_ttf_INSTALL}\\include"
+    )
+else ()
+    include_directories(
+            #my own shit
+            "include"
+            ${SDL2_INCLUDE_DIRS}
+            ${SDL2_image_INCLUDE_DIRS}
+            ${SDL2_MIXER_INCLUDE_DIRS}
+            ${SDL2_NET_INCLUDE_DIRS}
+            ${SDL2_TTF_INCLUDE_DIRS}
+    )
+endif ()
+message("pluh pluh ${SDL2_INCLUDE_DIRS}")
 
 add_executable(horse main.cpp
         include/app.cpp
@@ -50,6 +68,12 @@ add_executable(horse main.cpp
         include/game/entity/player.h
         include/game/math/vec2.cpp
         include/game/math/vec2.h
+        include/game/game.cpp
+        include/game/game.h
+        include/game/game_state.cpp
+        include/game/game_state.h
+        include/platform/SDL2_includes.h
+        include/platform/SDL2_image_includes.h
 )
 
 target_link_libraries(horse

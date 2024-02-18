@@ -4,7 +4,6 @@
 
 #ifndef HORSE_POINT_H
 #define HORSE_POINT_H
-#include "game/math/vec2.h"
 
 namespace Geometry
 {
@@ -27,7 +26,6 @@ namespace Geometry
 
         // Other
         float distance(const Point& other);
-        Math::Vec2 vector_to(const Point& other);
     };
 }
 

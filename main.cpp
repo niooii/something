@@ -2,6 +2,9 @@
 
 #include <app.h>
 
+// needed for windows for some reason
+#undef main
+
 int main() {
     std::cout << "Hello, World!" << std::endl;
     App app = App{};
