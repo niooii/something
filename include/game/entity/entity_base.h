@@ -13,8 +13,6 @@ namespace Entity
 {
     class EntityBase
     {
-    private:
-
     protected:
         // Attributes
         EntityType entity_type;
@@ -30,7 +28,7 @@ namespace Entity
         // Callbacks
 
         // called after damage is dealt to the target
-        virtual void OnDealDmg(float original_dmg, float true_dmg_taken, EntityBase* dmged_entity);
+        virtual void OnDealDmg(float original_dmg, float true_dmg_taken, EntityBase *dmged_entity);
 
         // called before damage is applied
         // returns any changes to the incoming damage,
@@ -48,20 +46,13 @@ namespace Entity
 
     public:
         // Accessors
-        inline float GetOutgoingDamage()
-        {
-            return damage;
-        };
+        inline float GetOutgoingDamage() const { return damage; };
 
-        inline EntityType GetEntityType()
-        {
-            return entity_type;
-        };
+        inline float GetHealth() const { return health; }
 
-        inline std::optional<Geometry::Rect> GetHitbox()
-        {
-            return hitbox;
-        }
+        inline EntityType GetEntityType() const { return entity_type; };
+
+        inline std::optional<Geometry::Rect> GetHitbox() const { return hitbox; }
 
         // Other
         void TakeDamageFrom(EntityBase *dmg_dealer);

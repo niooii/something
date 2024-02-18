@@ -4,6 +4,7 @@
 
 #ifndef HORSE_POINT_H
 #define HORSE_POINT_H
+#include "game/math/vec2.h"
 
 namespace Geometry
 {
@@ -14,16 +15,19 @@ namespace Geometry
         float y_;
 
     public:
-        // Accessors
-        inline float x()
-        {
-            return x_;
-        }
+        // Contructors
+        Point();
 
-        inline float y()
-        {
-            return y_;
-        }
+        Point(float x, float y);
+
+        // Accessors
+        inline float x() { return x_; }
+
+        inline float y() { return y_; };
+
+        // Other
+        float distance(const Point& other);
+        Math::Vec2 vector_to(const Point& other);
     };
 }
 

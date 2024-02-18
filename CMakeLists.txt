@@ -39,6 +39,10 @@ add_executable(horse main.cpp
         include/game/geometry/point.h
         include/game/geometry/circle.cpp
         include/game/geometry/circle.h
+        include/game/entity/player.cpp
+        include/game/entity/player.h
+        include/game/math/vec2.cpp
+        include/game/math/vec2.h
 )
 
 target_link_libraries(horse

@@ -20,25 +20,20 @@ namespace Geometry
 
     public:
         // Constructors
+        Rect(float x, float y, float side_len);
 
+        Rect(float x, float y, float w, float h);
 
         // Accessors
-        inline Point center()
-        {
-            return c_;
-        }
+        inline Point center() { return c_; }
 
-        inline float w()
-        {
-            return w_;
-        }
+        inline float w() { return w_; }
 
-        inline float h()
-        {
-            return h_;
-        }
+        inline float h() { return h_; }
 
         // Other
+        float area();
+
         Point top_left_corner();
 
         Point top_right_corner();

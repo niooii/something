@@ -24,6 +24,15 @@ namespace Entity
         return apply_defense_to_dmg(original_dmg);
     }
 
+    void EntityBase::OnTakeDmg(float original_dmg, float true_dmg, EntityBase *dmg_dealer)
+    {
+
+    }
+
+    void EntityBase::OnTakeDmgFailed(float original_dmg, float true_dmg, EntityBase *dmg_dealer)
+    {
+
+    }
 
 
     // Other

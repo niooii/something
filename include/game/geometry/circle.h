@@ -11,7 +11,9 @@ namespace Geometry
     class Circle
     {
     private:
+        // Center
         Point c_;
+        float r_;
     };
 }
 
