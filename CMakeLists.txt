@@ -53,8 +53,6 @@ add_executable(horse main.cpp
         include/app.h
         include/render/render_component.cpp
         include/render/render_component.h
-        include/object_info.cpp
-        include/object_info.h
         include/game/entity/entity_base.cpp
         include/game/entity/entity_base.h
         include/game/entity/entity_types.h
