@@ -19,7 +19,7 @@ namespace Math
     // Operators
     Vec2 Vec2::operator+(const Vec2& other) const
     {
-        return {x + other.x, y + other.y};
+        return Vec2{x + other.x, y + other.y};
     }
 
     Vec2& Vec2::operator+=(const Vec2& other)
@@ -31,7 +31,7 @@ namespace Math
 
     Vec2 Vec2::operator-(const Vec2& other) const
     {
-        return Vec2(x - other.x, y - other.y);
+        return Vec2{x - other.x, y - other.y};
     }
 
     Vec2& Vec2::operator-=(const Vec2& other)
@@ -43,7 +43,7 @@ namespace Math
 
     Vec2 Vec2::operator*(float scalar) const
     {
-        return Vec2(x * scalar, y * scalar);
+        return Vec2{x * scalar, y * scalar};
     }
 
     Vec2& Vec2::operator*=(float scalar)
@@ -57,12 +57,10 @@ namespace Math
     {
         if (scalar != 0.0f)
         {
-            return Vec2(x / scalar, y / scalar);
+            return Vec2{x / scalar, y / scalar};
         }
-        // loguru::
-        // Handle division by zero or very small scalar
-        // (you may want to throw an exception or handle it in a way that makes sense for your application)
-        return Vec2();
+        spdlog::warn("Attempted to divide Vec2({}, {}) element-wise by scalar 0. No changes have been made.", x, y);
+        return Vec2{x, y};
     }
 
     Vec2& Vec2::operator/=(float scalar)
@@ -72,14 +70,13 @@ namespace Math
             x /= scalar;
             y /= scalar;
         }
-        // Handle division by zero or very small scalar
-        // (you may want to throw an exception or handle it in a way that makes sense for your application)
+        spdlog::warn("Attempted to divide Vec2({}, {}) element-wise by scalar 0. No changes have been made.", x, y);
         return *this;
     }
 
     Vec2 Vec2::operator-() const
     {
-        return Vec2(-x, -y);
+        return Vec2{-x, -y};
     }
 
     bool Vec2::operator==(const Vec2& other) const
