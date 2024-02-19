@@ -24,9 +24,10 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(SDL2_net REQUIRED)
-if(!WIN32)
+if(NOT WIN32)
     find_package(fmt REQUIRED)
 endif ()
+
 find_package(spdlog REQUIRED)
 # manually get the include path for SDL_gpu
 
