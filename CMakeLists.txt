@@ -24,6 +24,7 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(SDL2_net REQUIRED)
+find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
 # manually get the include path for SDL_gpu
 
@@ -86,4 +87,6 @@ target_link_libraries(horse
         ${SDL2_MIXER_LIBRARIES}
         ${SDL2_NET_LIBRARIES}
         ${SDL2_TTF_LIBRARIES}
+        ${spdlog_LIBRARIES}
+        fmt::fmt
 )
