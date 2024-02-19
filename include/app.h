@@ -14,6 +14,15 @@ class App {
         CouldNotLoadTexture,
         TextureIdNonexistent
     };
+private:
+    bool requested_quit_;
+    std::vector<RenderComponent> render_components_;
+
+    // SDL2 internals
+    SDL_Window* window_;
+    SDL_Renderer* renderer_;
+    std::map<const char*, SDL_Texture*> texture_map_;
+
 public:
     App();
     ~App();
@@ -23,15 +32,6 @@ public:
     void DrawFrame();
     void HandleEvents();
     bool RequestedQuit();
-
-private:
-    bool requested_quit_;
-    std::vector<RenderComponent> render_components_;
-
-    // SDL2 internals
-    SDL_Window* window_;
-    SDL_Renderer* renderer_;
-    std::map<const char*, SDL_Texture*> texture_map_;
 };
 
 

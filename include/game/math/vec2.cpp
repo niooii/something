@@ -59,6 +59,7 @@ namespace Math
         {
             return Vec2(x / scalar, y / scalar);
         }
+        // loguru::
         // Handle division by zero or very small scalar
         // (you may want to throw an exception or handle it in a way that makes sense for your application)
         return Vec2();
