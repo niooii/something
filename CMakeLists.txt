@@ -24,7 +24,9 @@ find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
 find_package(SDL2_ttf REQUIRED)
 find_package(SDL2_net REQUIRED)
-find_package(fmt REQUIRED)
+if(!WIN32)
+    find_package(fmt REQUIRED)
+endif ()
 find_package(spdlog REQUIRED)
 # manually get the include path for SDL_gpu
 
@@ -81,7 +83,17 @@ add_executable(horse main.cpp
         include/logging/logger.h
 )
 
-target_link_libraries(horse
+if (WIN32)
+    target_link_libraries(horse
+        ${SDL2_LIBRARIES}
+        ${SDL2_IMAGE_LIBRARIES}
+        ${SDL2_MIXER_LIBRARIES}
+        ${SDL2_NET_LIBRARIES}
+        ${SDL2_TTF_LIBRARIES}
+        ${spdlog_LIBRARIES}
+    )
+else()
+    target_link_libraries(horse
         ${SDL2_LIBRARIES}
         ${SDL2_IMAGE_LIBRARIES}
         ${SDL2_MIXER_LIBRARIES}
@@ -89,4 +101,5 @@ target_link_libraries(horse
         ${SDL2_TTF_LIBRARIES}
         ${spdlog_LIBRARIES}
         fmt::fmt
-)
+    )
+endif ()
