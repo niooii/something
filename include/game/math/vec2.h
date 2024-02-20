@@ -64,7 +64,6 @@ namespace Math
         // & counterclockwise from original vec is positive
         // param axis_vec represents the x-axis.
         float angle_relative_to(Vec2& axis_vec);
-
     };
 } // Math
 

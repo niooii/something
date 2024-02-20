@@ -9,34 +9,35 @@ namespace Entity
     // Utility
     float EntityBase::apply_defense_to_dmg(float incoming_dmg) const
     {
-        return (1.f - defense/100.f) * incoming_dmg;
+        return (1.f - defense / 100.f) * incoming_dmg;
     }
 
     // Default virtual methods
-    void EntityBase::OnDealDmg(float original_dmg, float true_dmg_taken, EntityBase *dmged_entity)
+    void EntityBase::OnDealDmg(float original_dmg, float true_dmg_taken, EntityBase* dmged_entity, App* app)
     {
-
     }
 
 
-    float EntityBase::ProcessIncomingDmg(float original_dmg, EntityBase *dmg_dealer)
+    float EntityBase::ProcessIncomingDmg(float original_dmg, EntityBase* dmg_dealer, App* app)
     {
         return apply_defense_to_dmg(original_dmg);
     }
 
-    void EntityBase::OnTakeDmg(float original_dmg, float true_dmg, EntityBase *dmg_dealer)
+    void EntityBase::OnTakeDmg(float original_dmg, float true_dmg, EntityBase* dmg_dealer, App* app)
     {
-
     }
 
-    void EntityBase::OnTakeDmgFailed(float original_dmg, float true_dmg, EntityBase *dmg_dealer)
+    void EntityBase::OnTakeDmgFailed(float original_dmg, float true_dmg, EntityBase* dmg_dealer, App* app)
     {
+    }
 
+    void EntityBase::OnInteract(EntityBase* interactor, App* app)
+    {
     }
 
 
     // Other
-    void EntityBase::TakeDamageFrom(EntityBase *dmg_dealer)
+    void EntityBase::TakeDamageFrom(EntityBase* dmg_dealer, App* app)
     {
         if (!this->can_take_damage)
         {
@@ -48,9 +49,9 @@ namespace Entity
         {
             return;
         }
-        float true_dmg = ProcessIncomingDmg(original_dmg, dmg_dealer);
+        float true_dmg = ProcessIncomingDmg(original_dmg, dmg_dealer, app);
         this->health -= true_dmg;
-        this->OnTakeDmg(original_dmg, true_dmg, dmg_dealer);
-        dmg_dealer->OnDealDmg(original_dmg, true_dmg, this);
+        this->OnTakeDmg(original_dmg, true_dmg, dmg_dealer, app);
+        dmg_dealer->OnDealDmg(original_dmg, true_dmg, this, app);
     }
 }

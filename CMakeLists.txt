@@ -59,7 +59,6 @@ endif ()
 add_executable(horse main.cpp
         include/app.cpp
         include/app.h
-        include/render/render_component.cpp
         include/render/render_component.h
         include/game/entity/entity_base.cpp
         include/game/entity/entity_base.h
@@ -82,6 +81,9 @@ add_executable(horse main.cpp
         include/platform/SDL2_image_includes.h
         include/logging/logger.h
         include/logging/logger.h
+        include/render/clickable_component.h
+        include/render/ui/text_field.cpp
+        include/render/ui/text_field.h
 )
 
 if (WIN32)
