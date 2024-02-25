@@ -1,7 +1,7 @@
 #ifndef SDLGAMEFRAMEWORK_APP_H
 #define SDLGAMEFRAMEWORK_APP_H
 
-#include "render/render_component.h"
+#include "render/components/render_component.h"
 
 #include "platform/SDL2_includes.h"
 
@@ -16,7 +16,7 @@ class App {
     };
 private:
     bool requested_quit_;
-    std::vector<RenderComponent> render_components_;
+    std::vector<Render::RenderComponent> render_components_;
 
     // SDL2 internals
     SDL_Window* window_;

@@ -12,37 +12,29 @@ namespace Geometry
 {
     class Rect
     {
-    private:
-        // Center point
-        Point c_;
-        float w_;
-        float h_;
-
     public:
         // Constructors
+        Rect();
         Rect(float x, float y, float side_len);
-
         Rect(float x, float y, float w, float h);
 
-        // Accessors
-        inline Point center() { return c_; }
-
-        inline float w() { return w_; }
-
-        inline float h() { return h_; }
+        // Center point
+        Point c;
+        float w;
+        float h;
 
         // Other
-        float area();
+        float area() const;
 
-        Point top_left_corner();
+        Point top_left_corner() const;
 
-        Point top_right_corner();
+        Point top_right_corner() const;
 
-        Point bottom_left_corner();
+        Point bottom_left_corner() const;
 
-        Point bottom_right_corner();
+        Point bottom_right_corner() const;
 
-        bool contains_point(Point point);
+        bool contains_point(Point& point) const;
     };
 }
 

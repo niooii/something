@@ -19,6 +19,12 @@ if(WIN32)
     set(spdlog_DIR "${spdlog_INSTALL}\\cmake")
 endif ()
 
+add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khrplatform.h external/glad/src/glad.c
+        include/render/backends/opengl/opengl_renderer.cpp
+        include/render/backends/opengl/opengl_renderer.h
+        include/render/backends/opengl/opengl_renderer.h)
+include_directories(glad external/glad/include)
+
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
@@ -59,7 +65,7 @@ endif ()
 add_executable(horse main.cpp
         include/app.cpp
         include/app.h
-        include/render/render_component.h
+        include/render/components/render_component.h
         include/game/entity/entity_base.cpp
         include/game/entity/entity_base.h
         include/game/entity/entity_types.h
@@ -81,9 +87,14 @@ add_executable(horse main.cpp
         include/platform/SDL2_image_includes.h
         include/logging/logger.h
         include/logging/logger.h
-        include/render/clickable_component.h
-        include/render/ui/text_field.cpp
-        include/render/ui/text_field.h
+        include/render/components/clickable_component.h
+        include/render/components/ui/text_field.cpp
+        include/render/components/ui/text_field.h
+        include/render/Renderer.cpp
+        include/render/Renderer.h
+        include/render/Renderer.h
+        include/render/backends/backend_types.h
+        include/render/backends/renderer_interface.h
 )
 
 if (WIN32)

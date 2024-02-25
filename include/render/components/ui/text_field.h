@@ -4,7 +4,7 @@
 
 #ifndef TEXT_FIELD_H
 #define TEXT_FIELD_H
-#include "render/clickable_component.h"
+#include "render/components/clickable_component.h"
 
 namespace Render::UI
 {

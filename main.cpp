@@ -11,7 +11,7 @@
 int main(int argc, char* argv[]) {
     spdlog::set_level(spdlog::level::debug);
     App app = App{};
-    for(int i = 0; i < 2000; i++) {
+    for(int i = 0; i < 213; i++) {
         std::cout << i << '\n';
     }
     for(int i = 0; i < 2000; i++) {

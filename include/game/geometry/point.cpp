@@ -6,15 +6,16 @@
 
 namespace Geometry
 {
-    Point::Point() : x_(0.f), y_(0.f)
+    Point::Point() : x(0.f), y(0.f)
     {
     }
 
-    Point::Point(const float x, const float y) : x_(x), y_(y)
+    Point::Point(const float x_, const float y_) : x(x_), y(y_)
     {
     }
 
     float Point::distance(const Point& other)
     {
+        return sqrtf((other.x - this->x) * (other.x - this->x) + (other.y - this->y) * (other.y - this->y));
     }
 }

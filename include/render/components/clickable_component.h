@@ -7,7 +7,8 @@
 
 namespace Render
 {
-    class ClickableComponent {
+    class ClickableComponent
+    {
     protected:
         bool use_world_coords{false};
         int z_idx{0};

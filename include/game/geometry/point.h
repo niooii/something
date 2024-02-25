@@ -5,14 +5,12 @@
 #ifndef HORSE_POINT_H
 #define HORSE_POINT_H
 
+#include <cmath>
+
 namespace Geometry
 {
     class Point
     {
-    private:
-        float x_;
-        float y_;
-
     public:
         // Contructors
         Point();
@@ -20,9 +18,8 @@ namespace Geometry
         Point(float x, float y);
 
         // Accessors
-        inline float x() { return x_; }
-
-        inline float y() { return y_; };
+        float x;
+        float y;
 
         // Other
         float distance(const Point& other);
