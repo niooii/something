@@ -11,11 +11,14 @@
 
 #include "render/renderer.h"
 
-class App {
-    enum AppError {
+class App
+{
+    enum AppError
+    {
         CouldNotLoadTexture,
         TextureIdNonexistent
     };
+
 private:
     bool requested_quit_;
     std::vector<Render::RenderComponent> render_components_;

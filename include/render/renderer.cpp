@@ -4,9 +4,10 @@
 
 #include "renderer.h"
 
-namespace Render {
+namespace Render
+{
     Renderer::Renderer(BackendType backend_type_)
-    : backend_type(backend_type_)
+        : backend_type(backend_type_)
     {
         switch (backend_type)
         {
