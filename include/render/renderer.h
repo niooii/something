@@ -8,6 +8,7 @@
 
 #include "backends/backend_types.h"
 #include "backends/renderer_interface.h"
+#include "backends/opengl/gl_renderer.h"
 
 namespace Render
 {
@@ -15,21 +16,12 @@ namespace Render
     {
     protected:
         BackendType backend_type;
-        RendererInterface* renderer_backend;
+        RendererInterface* renderer_interface;
 
     public:
-        Renderer(BackendType backend_type_) : backend_type(backend_type_)
-        {
-            switch (backend_type)
-            {
-            case OPENGL:
-                throw std::runtime_error{"Not implemented! Exiting now..."};
-            case DIRECTX:
-                throw std::runtime_error{"Not implemented! Exiting now..."};
-            case VULKAN:
-                throw std::runtime_error{"Not implemented! Exiting now..."};
-            }
-        }
+        explicit Renderer(BackendType backend_type_);
+
+        void Init(SDL_Window* window);
     };
 } // Render
 

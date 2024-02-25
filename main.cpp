@@ -10,7 +10,7 @@
 
 int main(int argc, char* argv[]) {
     spdlog::set_level(spdlog::level::debug);
-    App app = App{};
+    App app = App{Render::BackendType::OPENGL};
     for(int i = 0; i < 213; i++) {
         std::cout << i << '\n';
     }

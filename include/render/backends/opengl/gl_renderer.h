@@ -16,7 +16,12 @@ namespace Render
     private:
 
     public:
-        GlRenderer(SDL_Window* window);
+        GlRenderer();
+
+        void Init(SDL_Window* window) override;
+
+        void SetViewportSize(Vec2 size) override;
+        void DrawRectangle(Rect rect) override;
     };
 } // Render
 

@@ -15,13 +15,16 @@ namespace Render
     class RendererInterface
     {
     protected:
-        SDL_Window* window;
+        SDL_Window* window{nullptr};
 
     public:
-        // Constructor
-        explicit RendererInterface(SDL_Window* window_) : window(window_)
+        // Constructor must initialize window pointer.
+        explicit RendererInterface()
         {
         }
+
+        // Inits window ptr specifically for backend type and the renderer itself
+        virtual void Init(SDL_Window* window_) = 0;
 
         // Specific draw methods for each implemented backend type
         virtual void SetViewportSize(Vec2 size) = 0;

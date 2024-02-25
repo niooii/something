@@ -19,10 +19,7 @@ if(WIN32)
     set(spdlog_DIR "${spdlog_INSTALL}\\cmake")
 endif ()
 
-add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khrplatform.h external/glad/src/glad.c
-        include/render/backends/opengl/opengl_renderer.cpp
-        include/render/backends/opengl/opengl_renderer.h
-        include/render/backends/opengl/opengl_renderer.h)
+add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khrplatform.h external/glad/src/glad.c)
 include_directories(glad external/glad/include)
 
 find_package(SDL2 REQUIRED)
@@ -95,6 +92,8 @@ add_executable(horse main.cpp
         include/render/Renderer.h
         include/render/backends/backend_types.h
         include/render/backends/renderer_interface.h
+        include/render/backends/opengl/gl_renderer.cpp
+        include/render/backends/opengl/gl_renderer.h
 )
 
 if (WIN32)

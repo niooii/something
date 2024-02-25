@@ -9,6 +9,8 @@
 #include <map>
 #include <expected>
 
+#include "render/renderer.h"
+
 class App {
     enum AppError {
         CouldNotLoadTexture,
@@ -18,13 +20,12 @@ private:
     bool requested_quit_;
     std::vector<Render::RenderComponent> render_components_;
 
-    // SDL2 internals
-    SDL_Window* window_;
-    SDL_Renderer* renderer_;
+    SDL_Window* window_{nullptr};
+    Render::Renderer renderer_;
     std::map<const char*, SDL_Texture*> texture_map_;
 
 public:
-    App();
+    App(Render::BackendType render_backend_type);
     ~App();
     std::expected<void, AppError> AddTexture(const char* texture_id, const char* path);
     std::expected<void, AppError> AddRenderComponent();
