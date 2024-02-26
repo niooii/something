@@ -1,26 +1,30 @@
 #include "app.h"
 
-App::App(
-    const char* name,
-    const u32 x,
-    const u32 y,
-    const u16 width,
-    const u16 height,
-    Render::BackendType render_backend_type
-    )
-    : renderer_{Render::Renderer{render_backend_type}}
+App::App(Render::BackendType render_backend_type)
+    : render_backend_type_{render_backend_type},
+    renderer_{Render::Renderer{render_backend_type}}
 {
 #ifdef WIN32
     SetProcessDPIAware();
 #endif
-    spdlog::debug("Initializing SDL.");
     SDL_Init(SDL_INIT_EVERYTHING);
-    Window* win = new Window{"Main", 0, 1080, 600, 600, Render::OPENGL};
-    Window* win2 = new Window{"Main2", 1800, 600, 200, 200, Render::OPENGL};
-    windows_[win->window_id()] = win;
-    windows_[win2->window_id()] = win2;
-    main_window_ = win;
-    renderer_.Init(name, x, y, width, height, main_window_->sdl_window());
+    CreateNewWindow(
+        "messhhaw",
+        500,
+        300,
+        600,
+        600,
+        true
+    );
+    CreateNewWindow(
+        "messhhaw",
+        1500,
+        300,
+        600,
+        600,
+        true
+    );
+    renderer_.Init(main_window_->sdl_window());
 }
 
 App::~App()
@@ -32,6 +36,36 @@ App::~App()
     SDL_Quit();
 }
 
+Window* App::CreateNewWindow(
+        const char* name,
+        u32 x,
+        u32 y,
+        u16 width,
+        u16 height,
+        bool is_main_window
+    )
+{
+    Window* win = new Window{name, x, y, width, height, render_backend_type_};
+
+    windows_[win->window_id()] = win;
+
+    if (is_main_window)
+    {
+        main_window_ = win;
+    }
+
+    return win;
+}
+
+bool App::DestroyWindow(u32 window_id)
+{
+    delete windows_[window_id];
+    windows_.erase(window_id);
+
+    // TODO! do something here idk
+    return true;
+}
+
 void App::DrawFrame()
 {
     renderer_.DrawTest();
@@ -39,18 +73,19 @@ void App::DrawFrame()
 
 void App::Update()
 {
-    // compute deltatime
+    // update time values
     last_ = now_;
     now_ = SDL_GetPerformanceCounter();
     delta_time_ = (now_ - last_) / static_cast<f64>(SDL_GetPerformanceFrequency());
+    elapsed_time_ = SDL_GetTicks64() / 1000.f;
 
     // handle window updates and events
     PollEvents();
     for (auto& [window_id, window] : windows_)
     {
-        // window->Transform().w += 100.f * delta_time_;
-        // window->Transform().h += 100.f * delta_time_;
-        window->Transform().c += Math::Vec2{100.f * delta_time_, 100.f * delta_time_};
+        window->Transform().w = 600.f * abs(sin(elapsed_time_)) + 120;
+        window->Transform().h = 600.f * abs(sin(elapsed_time_)) + 120;
+        window->Transform().c += Math::Vec2{60.f * delta_time_, 60.f * delta_time_};
         window->Update();
     }
 
@@ -67,13 +102,14 @@ void App::PollEvents()
     while (SDL_PollEvent(&e_))
     {
         u32 window_id = e_.window.windowID;
-        // Window* target_window = windows_.at(window_id);
-        spdlog::debug("event from {}", window_id);
+        // if it is not associated with a window, it is 0.
+        // (i'm guessing)
+        Window* target_window = windows_.contains(window_id) == 0 ? nullptr : windows_.at(window_id);
         switch (e_.type)
         {
         case SDL_QUIT:
             // requested_quit_ = true;
-            break;
+           break;
 
         case SDL_WINDOWEVENT:
             HandleWindowEvents(e_.window.event);
@@ -114,7 +150,7 @@ void App::PollEvents()
 void App::HandleWindowEvents(u8 window_event)
 {
     u32 window_id = e_.window.windowID;
-    Window* target_window = windows_.at(window_id);
+    Window* target_window = windows_.contains(window_id) == 0 ? nullptr : windows_.at(window_id);
     switch (window_event)
     {
     case SDL_WINDOWEVENT_RESIZED:
@@ -135,6 +171,11 @@ void App::HandleWindowEvents(u8 window_event)
             target_window->Transform().c = new_center;
             spdlog::debug("{}, {}", x, y);
         }
+        break;
+
+    case SDL_WINDOWEVENT_CLOSE:
+        spdlog::debug("Window closed...");
+        DestroyWindow(window_id);
         break;
     }
 }

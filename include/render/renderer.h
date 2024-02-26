@@ -22,15 +22,9 @@ namespace Render
         explicit Renderer(BackendType backend_type_);
 
         // TODO! make everything in sight inline
-        inline void Init(
-            const char* name,
-            const u32 x,
-            const u32 y,
-            const u16 width,
-            const u16 height,
-            SDL_Window* window)
+        inline void Init(SDL_Window* window)
         {
-            renderer_interface->Init(name, x, y, width, height, window);
+            renderer_interface->Init(window);
         };
 
         inline void DrawTest()

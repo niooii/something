@@ -9,7 +9,7 @@ namespace Render
     GlRenderer::GlRenderer()
     = default;
 
-    void GlRenderer::Init(const char* name, u32 x, u32 y, u16 width, u16 height, SDL_Window* window)
+    void GlRenderer::Init(SDL_Window* window)
     {
         SDL_GL_CreateContext(window);
 

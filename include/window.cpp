@@ -48,8 +48,6 @@ Window::Window(const char* name, u32 x, u32 y, u16 w, u16 h, Render::BackendType
         static_cast<f32>(h)
     };
     prev_transform_ = transform_;
-
-    spdlog::debug("Window initialized with initial transform Point{}, {} and w{}, h{}", transform_.c.x, transform_.c.y, transform_.w, transform_.h);
 }
 
 Window::~Window()

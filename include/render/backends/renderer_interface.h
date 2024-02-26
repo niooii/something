@@ -26,7 +26,7 @@ namespace Render
         }
 
         // Inits renderer w the window pointer
-        virtual void Init(const char* name, u32 x, u32 y, u16 width, u16 height, SDL_Window* window_) = 0;
+        virtual void Init(SDL_Window* window_) = 0;
 
         // Specific draw methods for each implemented backend type
         virtual void SetViewportSize(Vec2 size) = 0;
