@@ -8,6 +8,7 @@
 #include "render/backends/renderer_interface.h"
 
 #include <glad/glad.h>
+#include "types.h"
 
 namespace Render
 {
@@ -18,7 +19,13 @@ namespace Render
     public:
         GlRenderer();
 
-        void Init(SDL_Window* window) override;
+        void Init(
+            const char* name,
+            u32 x,
+            u32 y,
+            u16 width,
+            u16 height,
+            SDL_Window* window) override;
 
         void SetViewportSize(Vec2 size) override;
         void DrawRectangle(Rect rect) override;

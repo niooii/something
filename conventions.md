@@ -14,4 +14,4 @@ void some_fn()
 - Always use `this` keyword when using member variables or functions.
 ### Logical
 
-- Y-coordinates will be from lower (bottom) to higher (top), unlike the programming convention of starting at the top to bottom.
+- Y-coordinates follow the common convention of lower at the top to higher at the bottom. 

@@ -10,8 +10,9 @@
 class Game
 {
 private:
-    const char* name;
-    GameState state;
+    const char* name_;
+    GameState state_;
+    bool should_quit_{false};
 
     bool LoadGameStateFromDisk();
     bool WriteGameStateToDisk();
@@ -19,6 +20,12 @@ private:
 public:
     Game(const char* name);
     Game(const char* name, bool override_last_save);
+
+    // Accessors
+    inline bool should_quit()
+    {
+        return should_quit_;
+    }
 };
 
 

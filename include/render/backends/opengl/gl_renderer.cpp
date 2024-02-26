@@ -9,20 +9,17 @@ namespace Render
     GlRenderer::GlRenderer()
     = default;
 
-    void GlRenderer::Init(SDL_Window* window)
+    void GlRenderer::Init(const char* name, u32 x, u32 y, u16 width, u16 height, SDL_Window* window)
     {
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+        SDL_GL_CreateContext(window);
 
-        window = SDL_CreateWindow(
-            "SomeName",
-            SDL_WINDOWPOS_CENTERED,
-            SDL_WINDOWPOS_CENTERED,
-            800,
-            800,
-            SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
-        );
+        if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
+        {
+            spdlog::error("Failed to load OpenGL. The program will exit now...");
+            exit(-1);
+        }
+
+
 
     }
 
@@ -32,5 +29,6 @@ namespace Render
 
     void GlRenderer::DrawRectangle(Rect rect)
     {
+
     }
 } // Render

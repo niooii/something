@@ -10,12 +10,19 @@
 
 int main(int argc, char* argv[]) {
     spdlog::set_level(spdlog::level::debug);
-    App app = App{Render::BackendType::OPENGL};
-    for(int i = 0; i < 213; i++) {
-        std::cout << i << '\n';
+    App app = App{
+        "hehehehaw",
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        800,
+        600,
+        Render::BackendType::OPENGL};
+
+    while (!app.should_quit())
+    {
+        app.DrawFrame();
+        app.Update();
     }
-    for(int i = 0; i < 2000; i++) {
-        spdlog::debug("hi {}", i);
-    }
+
     return 0;
 }

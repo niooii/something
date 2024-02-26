@@ -20,9 +20,4 @@ namespace Render
             throw std::runtime_error{"Not implemented! Exiting now..."};
         }
     }
-
-    void Renderer::Init(SDL_Window* window)
-    {
-        renderer_interface->Init(window);
-    }
 } // Render

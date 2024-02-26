@@ -21,7 +21,22 @@ namespace Render
     public:
         explicit Renderer(BackendType backend_type_);
 
-        void Init(SDL_Window* window);
+        // TODO! make everything in sight inline
+        inline void Init(
+            const char* name,
+            const u32 x,
+            const u32 y,
+            const u16 width,
+            const u16 height,
+            SDL_Window* window)
+        {
+            renderer_interface->Init(name, x, y, width, height, window);
+        };
+
+        inline void DrawTest()
+        {
+            renderer_interface->DrawRectangle(Rect{1, 1, 2});
+        }
     };
 } // Render
 

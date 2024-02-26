@@ -4,8 +4,12 @@
 
 #ifndef VEC2_H
 #define VEC2_H
-#include "game/geometry/point.h"
 #include <spdlog/spdlog.h>
+
+namespace Geometry
+{
+    class Point;
+}
 
 namespace Math
 {

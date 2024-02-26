@@ -19,9 +19,6 @@ if(WIN32)
     set(spdlog_DIR "${spdlog_INSTALL}\\cmake")
 endif ()
 
-add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khrplatform.h external/glad/src/glad.c)
-include_directories(glad external/glad/include)
-
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_mixer REQUIRED)
@@ -66,16 +63,16 @@ add_executable(horse main.cpp
         include/game/entity/entity_base.cpp
         include/game/entity/entity_base.h
         include/game/entity/entity_types.h
-        include/game/geometry/rect.cpp
-        include/game/geometry/rect.h
-        include/game/geometry/point.cpp
-        include/game/geometry/point.h
-        include/game/geometry/circle.cpp
-        include/game/geometry/circle.h
+        include/geometry/rect.cpp
+        include/geometry/rect.h
+        include/geometry/point.cpp
+        include/geometry/point.h
+        include/geometry/circle.cpp
+        include/geometry/circle.h
         include/game/entity/player.cpp
         include/game/entity/player.h
-        include/game/math/vec2.cpp
-        include/game/math/vec2.h
+        include/math/vec2.cpp
+        include/math/vec2.h
         include/game/game.cpp
         include/game/game.h
         include/game/game_state.cpp
@@ -94,7 +91,17 @@ add_executable(horse main.cpp
         include/render/backends/renderer_interface.h
         include/render/backends/opengl/gl_renderer.cpp
         include/render/backends/opengl/gl_renderer.h
+        include/types.h
+        include/Window.cpp
+        include/Window.h
 )
+
+# Extern
+add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khrplatform.h external/glad/src/glad.c
+        include/types.h
+        include/Window.h)
+include_directories(glad external/glad/include)
+target_link_libraries(horse glad)
 
 if (WIN32)
     target_link_libraries(horse

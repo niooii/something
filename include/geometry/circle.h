@@ -13,7 +13,7 @@ namespace Geometry
     private:
         // Center
         Point c_;
-        float r_;
+        f32 r_;
     };
 }
 

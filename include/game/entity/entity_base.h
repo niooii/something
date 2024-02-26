@@ -8,7 +8,7 @@
 
 #include "app.h"
 #include "entity_types.h"
-#include "game/geometry/rect.h"
+#include "geometry/rect.h"
 
 namespace Entity
 {
