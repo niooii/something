@@ -52,13 +52,20 @@ Window::Window(const char* name, u32 x, u32 y, u16 w, u16 h, Render::BackendType
 
 Window::~Window()
 {
+    CaptureMouse(false);
     SDL_DestroyWindow(sdl_window_);
 }
 
 void Window::Update()
 {
-    // TODO! comparing center points, must shift accordignly
     UpdateTransform();
+
+    if (!is_focused_ && should_be_always_focused_)
+    {
+        SDL_RaiseWindow(sdl_window_);
+        is_focused_ = true;
+        spdlog::debug("stealing focus back ehehehe");
+    }
 }
 
 

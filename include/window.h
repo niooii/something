@@ -30,6 +30,8 @@ private:
 
  // OTHER ATTRIBUTES
  bool requested_quit_{false};
+ bool is_focused_{false};
+ bool should_be_always_focused_{false};
 
  // CALLBACK DECLARATIONS
  void (*on_mouse_motion_)(int x, int y, int xrel, int yrel){nullptr};
@@ -64,7 +66,7 @@ public:
  {
   return sdl_window_;
  }
- inline u32 window_id()
+ inline u32 window_id() const
  {
   return window_id_;
  }
@@ -76,6 +78,25 @@ public:
  inline u16 height() const
  {
   return transform.h;
+ }
+ inline void UpdateWindowFocusStatus(bool is_focused)
+ {
+  is_focused_ = is_focused;
+ }
+
+ // Convenience methods
+ inline void CaptureMouse(bool capture) const
+ {
+  SDL_SetWindowGrab(sdl_window_, capture ? SDL_TRUE : SDL_FALSE);
+ }
+ inline void AlwaysOnTop(bool always_on_top) const
+ {
+  SDL_SetWindowAlwaysOnTop(sdl_window_, always_on_top ? SDL_TRUE : SDL_FALSE);
+ }
+ // this will attempt to steal input focus back to the window every update.
+ inline void AlwaysFocused(bool focused)
+ {
+  should_be_always_focused_ = focused;
  }
 
  //TODO! replace with event architecture thing.

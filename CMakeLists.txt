@@ -4,7 +4,7 @@ project(horse)
 set(CMAKE_CXX_STANDARD 23)
 
 if(WIN32)
-    set(SDL2_INSTALL "E:\\libs\\SDL2-2.28.5")
+    set(SDL2_INSTALL "E:\\libs\\SDL2-2.30.0")
     set(SDL2_image_INSTALL "E:\\libs\\SDL2_image-2.8.2")
     set(SDL2_mixer_INSTALL "E:\\libs\\SDL2_mixer-2.8.0")
     set(SDL2_ttf_INSTALL "E:\\libs\\SDL2_ttf-2.22.0")

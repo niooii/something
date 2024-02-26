@@ -16,15 +16,10 @@ App::App(Render::BackendType render_backend_type)
         600,
         true
     );
-    CreateNewWindow(
-        "messhhaw",
-        1500,
-        300,
-        600,
-        600,
-        true
-    );
     renderer_.Init(main_window_->sdl_window());
+    // main_window_->CaptureMouse(true);
+    // main_window_->AlwaysOnTop(true);
+    main_window_->AlwaysFocused(true);
 }
 
 App::~App()
@@ -90,11 +85,9 @@ void App::Update()
     {
         // window->transform.w = 600.f * abs(sin(elapsed_time_)) + 120;
         // window->transform.h = 600.f * abs(sin(elapsed_time_)) + 120;
-        window->transform.c = Geometry::Point{static_cast<f32>(GetMouse()->x()), static_cast<f32>(GetMouse()->y())};
+        // window->transform.c = Geometry::Point{static_cast<f32>(GetMouse()->x()), static_cast<f32>(GetMouse()->y())};
         window->Update();
     }
-
-    spdlog::debug("{}, {}", GetMouse()->x(), GetMouse()->y());
 
     /* Logic updates */
     // window_.transform().h +=  200.f * delta_time_;
@@ -188,9 +181,26 @@ void App::HandleWindowEvents(u8 window_event)
         break;
 
     case SDL_WINDOWEVENT_CLOSE:
-        spdlog::debug("Window closed...");
-        DestroyWindow(window_id);
+        {
+            spdlog::debug("Window closed...");
+            DestroyWindow(window_id);
+            break;
+        }
+
+    case SDL_WINDOWEVENT_FOCUS_LOST:
+        if (target_window != nullptr)
+        {
+            target_window->UpdateWindowFocusStatus(false);
+            spdlog::debug("a window has lost focus");
+        }
+        break;
+
+    case SDL_WINDOWEVENT_FOCUS_GAINED:
+        target_window->UpdateWindowFocusStatus(true);
+        spdlog::debug("a window has gained focus");
         break;
     }
 }
+
+
 
