@@ -27,8 +27,6 @@ private:
 
  // old transform to check if updates need to be made to it's position and scale
  Geometry::Rect prev_transform_;
- // transform of the window
- Geometry::Rect transform_;
 
  // OTHER ATTRIBUTES
  bool requested_quit_{false};
@@ -52,6 +50,10 @@ public:
  void Clear();
  void Clear(f32 r, f32 g, f32 b, f32 a);
 
+ // public attributes
+ // transform of the window
+ Geometry::Rect transform;
+
  inline bool requested_quit()
  {
   return requested_quit_;
@@ -66,17 +68,14 @@ public:
  {
   return window_id_;
  }
+
  inline u16 width() const
  {
-  return transform_.w;
+  return transform.w;
  }
  inline u16 height() const
  {
-  return transform_.h;
- }
- inline Geometry::Rect& Transform()
- {
-  return transform_;
+  return transform.h;
  }
 
  //TODO! replace with event architecture thing.

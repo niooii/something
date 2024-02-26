@@ -83,9 +83,9 @@ void App::Update()
     PollEvents();
     for (auto& [window_id, window] : windows_)
     {
-        window->Transform().w = 600.f * abs(sin(elapsed_time_)) + 120;
-        window->Transform().h = 600.f * abs(sin(elapsed_time_)) + 120;
-        window->Transform().c += Math::Vec2{60.f * delta_time_, 60.f * delta_time_};
+        window->transform.w = 600.f * abs(sin(elapsed_time_)) + 120;
+        window->transform.h = 600.f * abs(sin(elapsed_time_)) + 120;
+        // window->transform.c += Math::Vec2{60.f * delta_time_, 60.f * delta_time_};
         window->Update();
     }
 
@@ -102,9 +102,7 @@ void App::PollEvents()
     while (SDL_PollEvent(&e_))
     {
         u32 window_id = e_.window.windowID;
-        // if it is not associated with a window, it is 0.
-        // (i'm guessing)
-        Window* target_window = windows_.contains(window_id) == 0 ? nullptr : windows_.at(window_id);
+        Window* target_window = GetWindow(window_id);
         switch (e_.type)
         {
         case SDL_QUIT:
@@ -150,14 +148,25 @@ void App::PollEvents()
 void App::HandleWindowEvents(u8 window_event)
 {
     u32 window_id = e_.window.windowID;
-    Window* target_window = windows_.contains(window_id) == 0 ? nullptr : windows_.at(window_id);
+    Window* target_window = GetWindow(window_id);
     switch (window_event)
     {
+        // may be broken. a good solution is to just toggle off being able to resize the window LOL
     case SDL_WINDOWEVENT_RESIZED:
         {
             i32 w = e_.window.data1;
             i32 h = e_.window.data2;
 
+            // TODO!
+            Geometry::Point old_center = target_window->transform.c;
+            target_window->transform.w = w;
+            target_window->transform.h = h;
+
+            i32 x_, y_;
+            SDL_GetWindowPosition(target_window->sdl_window(), &x_, &y_);
+
+            Geometry::Point new_center = Geometry::Rect::TopLeftToCenter(x_, y_, w, h);
+            target_window->transform.c = new_center;
 
         }
         break;
@@ -168,7 +177,7 @@ void App::HandleWindowEvents(u8 window_event)
             i32 y = e_.window.data2;
 
             Geometry::Point new_center = Geometry::Rect::TopLeftToCenter(x, y, target_window->width(), target_window->height());
-            target_window->Transform().c = new_center;
+            target_window->transform.c = new_center;
             spdlog::debug("{}, {}", x, y);
         }
         break;

@@ -42,12 +42,12 @@ Window::Window(const char* name, u32 x, u32 y, u16 w, u16 h, Render::BackendType
     SDL_GetWindowPosition(sdl_window_, &x_, &y_);
     Geometry::Point center = Geometry::Rect::TopLeftToCenter(x_, y_, w, h);
 
-    transform_ = Geometry::Rect{
+    transform = Geometry::Rect{
         center,
         static_cast<f32>(w),
         static_cast<f32>(h)
     };
-    prev_transform_ = transform_;
+    prev_transform_ = transform;
 }
 
 Window::~Window()
@@ -99,24 +99,24 @@ void Window::SetKeyUpCallback(void (*callback)(SDL_Keycode key,
 void Window::UpdateTransform()
 {
     // update window transform accordingly
-    if (prev_transform_.w != transform_.w || prev_transform_.h != transform_.h)
+    if (prev_transform_.w != transform.w || prev_transform_.h != transform.h)
     {
-        if (prev_transform_.c != transform_.c)
+        if (prev_transform_.c != transform.c)
         {
-            prev_transform_.c = transform_.c;
+            prev_transform_.c = transform.c;
         }
-        Geometry::Point left_corner = transform_.top_left_corner();
+        Geometry::Point left_corner = transform.top_left_corner();
         SDL_SetWindowPosition(sdl_window_, left_corner.x, left_corner.y);
-        SDL_SetWindowSize(sdl_window_, transform_.w, transform_.h);
-        prev_transform_.w = transform_.w;
-        prev_transform_.h = transform_.h;
+        SDL_SetWindowSize(sdl_window_, transform.w, transform.h);
+        prev_transform_.w = transform.w;
+        prev_transform_.h = transform.h;
 
     }
-    else if (prev_transform_.c != transform_.c)
+    else if (prev_transform_.c != transform.c)
     {
-        Geometry::Point left_corner = transform_.top_left_corner();
+        Geometry::Point left_corner = transform.top_left_corner();
         SDL_SetWindowPosition(sdl_window_, left_corner.x, left_corner.y);
-        prev_transform_.c = transform_.c;
+        prev_transform_.c = transform.c;
     }
 
 }
