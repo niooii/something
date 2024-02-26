@@ -10,7 +10,7 @@
 #include <expected>
 
 #include "render/renderer.h"
-
+#include "input/input.h"
 #include "types.h"
 #include "window.h"
 #include "game/game.h"

@@ -81,13 +81,20 @@ void App::Update()
 
     // handle window updates and events
     PollEvents();
+
+    // handle updating input manager singletons
+    GetMouse()->Update();
+    GetKeyboard()->Update();
+
     for (auto& [window_id, window] : windows_)
     {
-        window->transform.w = 600.f * abs(sin(elapsed_time_)) + 120;
-        window->transform.h = 600.f * abs(sin(elapsed_time_)) + 120;
-        // window->transform.c += Math::Vec2{60.f * delta_time_, 60.f * delta_time_};
+        // window->transform.w = 600.f * abs(sin(elapsed_time_)) + 120;
+        // window->transform.h = 600.f * abs(sin(elapsed_time_)) + 120;
+        window->transform.c = Geometry::Point{static_cast<f32>(GetMouse()->x()), static_cast<f32>(GetMouse()->y())};
         window->Update();
     }
+
+    spdlog::debug("{}, {}", GetMouse()->x(), GetMouse()->y());
 
     /* Logic updates */
     // window_.transform().h +=  200.f * delta_time_;
@@ -131,11 +138,9 @@ void App::PollEvents()
         //     on_mousebutton_up(e_.button.x, e_.button.y, e_.button.button);
         //     break;
         //
-        // case SDL_KEYDOWN:
-        //     if (on_keydown_ == nullptr)
-        //         continue;
-        //     on_keydown_(e_.key.keysym.sym, e_.key.keysym.mod);
-        //     break;
+            case SDL_KEYDOWN:
+            spdlog::debug("keydodwn event");
+            break;
         //
         // case SDL_KEYUP:
         //     if (on_keyup_ == nullptr)

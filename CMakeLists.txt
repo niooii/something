@@ -84,22 +84,25 @@ add_executable(horse main.cpp
         include/render/components/clickable_component.h
         include/render/components/ui/text_field.cpp
         include/render/components/ui/text_field.h
-        include/render/Renderer.cpp
-        include/render/Renderer.h
-        include/render/Renderer.h
+        include/render/renderer.h
+        include/render/renderer.cpp 
         include/render/backends/backend_types.h
         include/render/backends/renderer_interface.h
         include/render/backends/opengl/gl_renderer.cpp
         include/render/backends/opengl/gl_renderer.h
         include/types.h
-        include/Window.cpp
-        include/Window.h
+        include/window.cpp
+        include/window.h
 )
 
 # Extern
 add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khrplatform.h external/glad/src/glad.c
-        include/types.h
-        include/Window.h)
+        include/input/mouse.cpp
+        include/input/mouse.h
+        include/input/keyboard.cpp
+        include/input/keyboard.h
+        include/input/input.h
+)
 include_directories(glad external/glad/include)
 target_link_libraries(horse glad)
 
