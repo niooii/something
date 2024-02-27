@@ -47,4 +47,25 @@ i32 Mouse::y()
     return y_;
 }
 
+void Mouse::MoveToRelative(Window* window, Geometry::Point rel_p)
+{
+    SDL_WarpMouseInWindow(window->sdl_window(), std::lround(rel_p.x), std::lround(rel_p.y));
+}
+
+void Mouse::MoveToRelative(Window* window, f32 rel_x, f32 rel_y)
+{
+    SDL_WarpMouseInWindow(window->sdl_window(), std::lround(rel_x), std::lround(rel_y));
+}
+
+void Mouse::MoveToAbsolute(Geometry::Point p)
+{
+    SDL_WarpMouseGlobal(std::lround(p.x), std::lround(p.y));
+}
+
+void Mouse::MoveToAbsolute(f32 x, f32 y)
+{
+    SDL_WarpMouseGlobal(std::lround(x), std::lround(y));
+}
+
+
 

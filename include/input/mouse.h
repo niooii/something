@@ -8,6 +8,8 @@
 
 #include <SDL_mouse.h>
 
+#include "window.h"
+
 class Mouse {
 protected:
     Mouse();
@@ -26,6 +28,10 @@ public:
 
     i32 x();
     i32 y();
+    void MoveToRelative(Window* window, Geometry::Point rel_p);
+    void MoveToRelative(Window* window, f32 rel_x, f32 rel_y);
+    void MoveToAbsolute(Geometry::Point p);
+    void MoveToAbsolute(f32 x, f32 y);
 };
 
 inline Mouse* GetMouse()

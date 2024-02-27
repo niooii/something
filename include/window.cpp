@@ -60,11 +60,11 @@ void Window::Update()
 {
     UpdateTransform();
 
-    if (!is_focused_ && should_be_always_focused_)
+    if (should_be_always_focused_)
     {
         SDL_RaiseWindow(sdl_window_);
+        // this shouldn't be necessary if it actaully worked, but remove later.
         is_focused_ = true;
-        spdlog::debug("stealing focus back ehehehe");
     }
 }
 

@@ -17,9 +17,6 @@ App::App(Render::BackendType render_backend_type)
         true
     );
     renderer_.Init(main_window_->sdl_window());
-    // main_window_->CaptureMouse(true);
-    // main_window_->AlwaysOnTop(true);
-    main_window_->AlwaysFocused(true);
 }
 
 App::~App()
@@ -83,11 +80,13 @@ void App::Update()
 
     for (auto& [window_id, window] : windows_)
     {
-        // window->transform.w = 600.f * abs(sin(elapsed_time_)) + 120;
-        // window->transform.h = 600.f * abs(sin(elapsed_time_)) + 120;
+        window->transform.w = 100.f * abs(sin(elapsed_time_)) + 200;
+        window->transform.h = 100.f * abs(sin(elapsed_time_)) + 200;
         // window->transform.c = Geometry::Point{static_cast<f32>(GetMouse()->x()), static_cast<f32>(GetMouse()->y())};
         window->Update();
+        GetMouse()->MoveToAbsolute(300, 300);
     }
+
 
     /* Logic updates */
     // window_.transform().h +=  200.f * delta_time_;
@@ -191,14 +190,14 @@ void App::HandleWindowEvents(u8 window_event)
         if (target_window != nullptr)
         {
             target_window->UpdateWindowFocusStatus(false);
-            spdlog::debug("a window has lost focus");
         }
         break;
 
     case SDL_WINDOWEVENT_FOCUS_GAINED:
-        target_window->UpdateWindowFocusStatus(true);
-        spdlog::debug("a window has gained focus");
-        break;
+        {
+            target_window->UpdateWindowFocusStatus(true);
+            break;
+        }
     }
 }
 

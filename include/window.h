@@ -94,6 +94,7 @@ public:
   SDL_SetWindowAlwaysOnTop(sdl_window_, always_on_top ? SDL_TRUE : SDL_FALSE);
  }
  // this will attempt to steal input focus back to the window every update.
+ // doesn't work right now for some reason
  inline void AlwaysFocused(bool focused)
  {
   should_be_always_focused_ = focused;
