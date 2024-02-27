@@ -93,18 +93,12 @@ add_executable(horse main.cpp
         include/types.h
         include/window.cpp
         include/window.h
-)
-
-# Extern
-add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khrplatform.h external/glad/src/glad.c
         include/input/mouse.cpp
         include/input/mouse.h
         include/input/keyboard.cpp
         include/input/keyboard.h
         include/input/input.h
 )
-include_directories(glad external/glad/include)
-target_link_libraries(horse glad)
 
 if (WIN32)
     target_link_libraries(horse
@@ -126,3 +120,8 @@ else()
         fmt::fmt
     )
 endif ()
+
+# Extern
+add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khrplatform.h external/glad/src/glad.c)
+include_directories(glad external/glad/include)
+target_link_libraries(horse glad)
