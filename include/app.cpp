@@ -84,6 +84,22 @@ void App::Update()
         window->transform.h = 100.f * abs(sin(elapsed_time_)) + 200;
         // window->transform.c = Geometry::Point{static_cast<f32>(GetMouse()->x()), static_cast<f32>(GetMouse()->y())};
         window->Update();
+        if (GetKeyboard()->IsKeyDown(Keycode::KEY_W))
+        {
+            window->transform.c.y -= 50.f * delta_time_;
+        }
+        if (GetKeyboard()->IsKeyDown(Keycode::KEY_S))
+        {
+            window->transform.c.y += 50.f * delta_time_;
+        }
+        if (GetKeyboard()->IsKeyDown(Keycode::KEY_A))
+        {
+            window->transform.c.x -= 50.f * delta_time_;
+        }
+        if (GetKeyboard()->IsKeyDown(Keycode::KEY_D))
+        {
+            window->transform.c.x += 50.f * delta_time_;
+        }
         GetMouse()->MoveToAbsolute(300, 300);
     }
 
