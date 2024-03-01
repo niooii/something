@@ -35,6 +35,7 @@ private:
     Render::BackendType render_backend_type_;
     Render::Renderer renderer_;
     std::map<const char*, SDL_Texture*> texture_map_;
+    float max_fps{999999};
 
     // Game
     std::optional<Game> horse_game_;
@@ -52,7 +53,7 @@ public:
     ~App();
 
     // Accessors
-    inline bool should_quit()
+    inline bool should_quit() const
     {
         return should_quit_;
     }
@@ -61,12 +62,12 @@ public:
         return *main_window_;
     }
     // Change in time from previous frame to current in seconds.
-    inline f32 get_delta_time()
+    inline f32 get_delta_time() const
     {
         return delta_time_;
     }
     // Elapsed time since SDL_Library initialization in seconds.
-    inline f32 get_elapsed_time()
+    inline f32 get_elapsed_time() const
     {
         return elapsed_time_;
     }
@@ -80,7 +81,7 @@ public:
         u16 height,
         bool is_main_window
     );
-    inline Window* GetWindow(u32 window_id)
+    inline Window* GetWindow(u32 window_id) const
     {
         return windows_.contains(window_id) == 0 ? nullptr : windows_.at(window_id);;
     }
@@ -88,6 +89,10 @@ public:
 
 
     std::expected<void, AppError> AddRenderComponent();
+    inline void SetMaxFPS(const float max_fps)
+    {
+        this->max_fps = max_fps;
+    };
 
     void DrawFrame();
     void Update();

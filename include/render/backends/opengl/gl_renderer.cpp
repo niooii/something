@@ -29,6 +29,10 @@ namespace Render
 
     void GlRenderer::DrawRectangle(Rect rect)
     {
-
     }
+
+    void GlRenderer::DrawText()
+    {
+    }
+
 } // Render

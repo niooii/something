@@ -23,6 +23,7 @@ namespace Render
 
         void SetViewportSize(Vec2 size) override;
         void DrawRectangle(Rect rect) override;
+        void DrawText() override;
     };
 } // Render
 

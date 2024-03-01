@@ -31,6 +31,7 @@ namespace Render
         // Specific draw methods for each implemented backend type
         virtual void SetViewportSize(Vec2 size) = 0;
         virtual void DrawRectangle(Rect rect) = 0;
+        virtual void DrawText() = 0;
     };
 }
 
