@@ -59,7 +59,7 @@ endif ()
 add_executable(horse main.cpp
         include/app.cpp
         include/app.h
-        include/render/components/render_component.h
+        include/render/components/base_component.h
         include/game/entity/entity_base.cpp
         include/game/entity/entity_base.h
         include/game/entity/entity_types.h
@@ -81,7 +81,6 @@ add_executable(horse main.cpp
         include/platform/SDL2_image_includes.h
         include/logging/logger.h
         include/logging/logger.h
-        include/render/components/clickable_component.h
         include/render/components/ui/text_field.cpp
         include/render/components/ui/text_field.h
         include/render/renderer.h
@@ -122,6 +121,9 @@ else()
 endif ()
 
 # Extern
-add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khrplatform.h external/glad/src/glad.c)
+add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khrplatform.h external/glad/src/glad.c
+        include/render/components/sprite_component.h
+        shared/transform.h
+)
 include_directories(glad external/glad/include)
 target_link_libraries(horse glad)

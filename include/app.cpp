@@ -46,6 +46,8 @@ Window* App::CreateNewWindow(
         main_window_ = win;
     }
 
+    main_window_->CaptureMouse(true);
+
     return win;
 }
 
@@ -86,6 +88,18 @@ void App::Update()
         window->Update();
     }
 
+    for (auto& [id, component] : render_components_)
+    {
+        // TODO! make better later i cba rn
+        component->DoOnPress();
+        component->DoOnHold(delta_time_);
+        component->DoOnRelease();
+
+        component->Draw(&this->renderer_);
+    }
+
+    // spdlog::debug("{}, {}", GetMouse()->x_rel(), GetMouse()->y_rel());
+    main_window_->AlwaysFocused(true);
 
     /* Logic updates */
     // window_.transform().h +=  200.f * delta_time_;

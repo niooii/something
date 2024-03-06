@@ -12,7 +12,7 @@ Keyboard::Keyboard()
 }
 
 // TODO! important
-void Keyboard::InitKeytrackingIfNotInit(Keycode code)
+void Keyboard::InitKeytrackingIfNotInit(Key code)
 {
     if (is_pressed_.contains(code) == 0)
     {
@@ -20,7 +20,7 @@ void Keyboard::InitKeytrackingIfNotInit(Keycode code)
     }
 }
 
-void Keyboard::UninitKeytrackingIfNotInUse(Keycode code)
+void Keyboard::UninitKeytrackingIfNotInUse(Key code)
 {
 
 }
@@ -52,18 +52,18 @@ void Keyboard::Update()
     }
 }
 
-bool Keyboard::IsKeyDown(const Keycode keycode) const
+bool Keyboard::IsKeyDown(const Key keycode) const
 {
     return keyboard_state_[keycode] == 1;
 }
 
-void Keyboard::SetKeyDownCallback(Keycode keycode, std::function<void()> callback)
+void Keyboard::SetKeyDownCallback(Key keycode, std::function<void()> callback)
 {
     on_key_press_callbacks_[keycode] = callback;
     InitKeytrackingIfNotInit(keycode);
 }
 
-void Keyboard::SetKeyUpCallback(Keycode keycode, std::function<void()> callback)
+void Keyboard::SetKeyUpCallback(Key keycode, std::function<void()> callback)
 {
     on_key_release_callbacks_[keycode] = callback;
     InitKeytrackingIfNotInit(keycode);

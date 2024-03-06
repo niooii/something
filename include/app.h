@@ -1,7 +1,7 @@
 #ifndef SDLGAMEFRAMEWORK_APP_H
 #define SDLGAMEFRAMEWORK_APP_H
 
-#include "render/components/render_component.h"
+#include "render/components/base_component.h"
 
 #include "platform/SDL2_includes.h"
 
@@ -23,18 +23,17 @@ class App
         TextureIdNonexistent,
     };
 
-private:
+protected:
     bool should_quit_{false};
 
     // Window and rendering
-    std::vector<Render::RenderComponent> render_components_;
+    std::map<u32, Render::RenderComponent*> render_components_;
     std::map<u32, Window*> windows_;
     Window* main_window_;
 
     SDL_Event e_{};
     Render::BackendType render_backend_type_;
     Render::Renderer renderer_;
-    std::map<const char*, SDL_Texture*> texture_map_;
     float max_fps{999999};
 
     // Game
@@ -87,8 +86,8 @@ public:
     }
     bool DestroyWindow(u32 window_id);
 
-
-    std::expected<void, AppError> AddRenderComponent();
+    // Returns the component's id on success
+    std::expected<u32, AppError> AddRenderComponent();
     inline void SetMaxFPS(const float max_fps)
     {
         this->max_fps = max_fps;

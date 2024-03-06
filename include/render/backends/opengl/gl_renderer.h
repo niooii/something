@@ -14,7 +14,8 @@ namespace Render
 {
     class GlRenderer : public RendererInterface
     {
-    private:
+    protected:
+
 
     public:
         GlRenderer();

@@ -15,8 +15,10 @@ protected:
     Mouse();
     static Mouse* instance_;
 
-    i32 x_, y_;
-    bool up_to_date_{false};
+    i32 x_global_, y_global_;
+    i32 x_rel_, y_rel_;
+    bool global_up_to_date_{false};
+    bool rel_up_to_date_{false};
 
 public:
     Mouse(Mouse &other) = delete;
@@ -28,6 +30,10 @@ public:
 
     i32 x();
     i32 y();
+
+    i32 x_rel();
+    i32 y_rel();
+
     void MoveToRelative(Window* window, Geometry::Point rel_p);
     void MoveToRelative(Window* window, f32 rel_x, f32 rel_y);
     void MoveToAbsolute(Geometry::Point p);

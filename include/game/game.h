@@ -6,10 +6,11 @@
 #define GAME_H
 #include "game_state.h"
 
+class App;
 
 class Game
 {
-private:
+protected:
     const char* name_;
     GameState state_;
     bool should_quit_{false};
@@ -18,8 +19,8 @@ private:
     bool WriteGameStateToDisk();
 
 public:
-    Game(const char* name);
-    Game(const char* name, bool override_last_save);
+    Game(App* app, const char* name);
+    Game(App* app, const char* name, bool override_last_save);
 
     // Accessors
     inline bool should_quit()

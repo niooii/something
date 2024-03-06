@@ -22,29 +22,51 @@ Mouse* Mouse::GetInstance()
 
 void Mouse::Update()
 {
-    up_to_date_ = false;
+    global_up_to_date_ = false;
 }
 
 i32 Mouse::x()
 {
-    if (!up_to_date_)
+    if (!global_up_to_date_)
     {
-        SDL_GetGlobalMouseState(&this->x_, &this->y_);
-        up_to_date_ = true;
+        SDL_GetGlobalMouseState(&this->x_global_, &this->y_global_);
+        global_up_to_date_ = true;
     }
 
-    return x_;
+    return x_global_;
 }
 
 i32 Mouse::y()
 {
-    if (!up_to_date_)
+    if (!global_up_to_date_)
     {
-        SDL_GetGlobalMouseState(&this->x_, &this->y_);
-        up_to_date_ = true;
+        SDL_GetGlobalMouseState(&this->x_global_, &this->y_global_);
+        global_up_to_date_ = true;
     }
 
-    return y_;
+    return y_global_;
+}
+
+i32 Mouse::x_rel()
+{
+    if (!rel_up_to_date_)
+    {
+        SDL_GetRelativeMouseState(&this->x_rel_, &this->y_rel_);
+        rel_up_to_date_ = true;
+    }
+
+    return x_rel_;
+}
+
+i32 Mouse::y_rel()
+{
+    if (!rel_up_to_date_)
+    {
+        SDL_GetRelativeMouseState(&this->x_rel_, &this->y_rel_);
+        rel_up_to_date_ = true;
+    }
+
+    return y_rel_;
 }
 
 void Mouse::MoveToRelative(Window* window, Geometry::Point rel_p)

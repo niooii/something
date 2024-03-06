@@ -12,7 +12,7 @@
 
 #include "types.h"
 
-enum Keycode
+enum Key
 {
     KEY_UNKNOWN = SDL_SCANCODE_UNKNOWN,
 
@@ -84,14 +84,14 @@ protected:
 
     const u8* keyboard_state_{nullptr};
 
-    std::map<Keycode, std::function<void()>> on_key_press_callbacks_;
-    std::map<Keycode, std::function<void()>> on_key_release_callbacks_;
+    std::map<Key, std::function<void()>> on_key_press_callbacks_;
+    std::map<Key, std::function<void()>> on_key_release_callbacks_;
 
     // keys contain all the keys present in the maps above
-    std::map<Keycode, bool> is_pressed_;
+    std::map<Key, bool> is_pressed_;
 
-    void InitKeytrackingIfNotInit(Keycode code);
-    void UninitKeytrackingIfNotInUse(Keycode code);
+    void InitKeytrackingIfNotInit(Key code);
+    void UninitKeytrackingIfNotInUse(Key code);
 public:
     Keyboard(Keyboard &other) = delete;
     void operator=(const Keyboard &) = delete;
@@ -100,9 +100,9 @@ public:
 
     void Update();
 
-    bool IsKeyDown(Keycode keycode) const;
-    void SetKeyDownCallback(Keycode keycode, std::function<void()> callback);
-    void SetKeyUpCallback(Keycode keycode, std::function<void()> callback);
+    bool IsKeyDown(Key keycode) const;
+    void SetKeyDownCallback(Key keycode, std::function<void()> callback);
+    void SetKeyUpCallback(Key keycode, std::function<void()> callback);
 };
 
 inline Keyboard* GetKeyboard()

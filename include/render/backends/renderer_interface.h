@@ -17,7 +17,7 @@ namespace Render
     class RendererInterface
     {
     protected:
-        SDL_Window* window{nullptr};
+        SDL_Window* window_{nullptr};
 
     public:
         // Constructor must initialize window pointer.
