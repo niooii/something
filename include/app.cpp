@@ -10,10 +10,10 @@ App::App(Render::BackendType render_backend_type)
     SDL_Init(SDL_INIT_EVERYTHING);
     CreateNewWindow(
         "messhhaw",
-        500,
-        300,
-        600,
-        600,
+        0,
+        0,
+        200,
+        200,
         true
     );
     renderer_.Init(main_window_->sdl_window());
@@ -28,6 +28,7 @@ App::~App()
     SDL_Quit();
 }
 
+// TODO! make macros for center shit and make it center point instead of top left yes
 Window* App::CreateNewWindow(
         const char* name,
         u32 x,
@@ -45,8 +46,6 @@ Window* App::CreateNewWindow(
     {
         main_window_ = win;
     }
-
-    main_window_->CaptureMouse(true);
 
     return win;
 }
@@ -99,10 +98,10 @@ void App::Update()
     }
 
     // spdlog::debug("{}, {}", GetMouse()->x_rel(), GetMouse()->y_rel());
-    main_window_->AlwaysFocused(true);
+    // main_window_->AlwaysFocused(true);
 
     /* Logic updates */
-    // window_.transform().h +=  200.f * delta_time_;
+    // main_window_->transform.c += Math::Vec2{50.f * delta_time_, 50.f * delta_time_};
 
     /* Rendering */
     // spdlog::debug("update took {}", delta_time_);

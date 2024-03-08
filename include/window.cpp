@@ -68,13 +68,6 @@ void Window::Update()
     }
 }
 
-
-void Window::Clear() { Clear(0.0f, 0.0f, 0.0f, 1.0f); }
-
-void Window::Clear(f32 r, f32 g, f32 b, f32 a)
-{
-}
-
 void Window::SetMouseMotionCallback(void (*callback)(int, int, int, int))
 {
     on_mouse_motion_ = callback;

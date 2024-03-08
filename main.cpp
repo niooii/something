@@ -2,7 +2,6 @@
 
 #include <app.h>
 
-#include "logging/logger.h"
 #include <spdlog/spdlog.h>
 
 // needed for windows for some reason
