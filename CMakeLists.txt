@@ -79,8 +79,6 @@ add_executable(horse main.cpp
         include/game/game_state.h
         include/platform/SDL2_includes.h
         include/platform/SDL2_image_includes.h
-        include/logging/logger.h
-        include/logging/logger.h
         include/render/components/ui/text_field.cpp
         include/render/components/ui/text_field.h
         include/render/renderer.h
