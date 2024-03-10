@@ -15,13 +15,15 @@ namespace Render
     class GlRenderer : public RendererInterface
     {
     protected:
-
+        std::optional<SDL_GLContext> gl_context_{};
 
     public:
         GlRenderer();
+        // ~GlRenderer();
 
-        void Init(SDL_Window* window) override;
-
+        void SetWindow(SDL_Window* window) override;
+        void Clear(const Color& color) override;
+        void Present() override;
         void SetViewportSize(Vec2 size) override;
         void DrawRectangle(Rect rect) override;
         void DrawText() override;

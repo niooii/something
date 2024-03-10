@@ -10,10 +10,10 @@ App::App(Render::BackendType render_backend_type)
     SDL_Init(SDL_INIT_EVERYTHING);
     CreateNewWindow(
         "messhhaw",
-        0,
-        0,
-        200,
-        200,
+        800,
+        800,
+        800,
+        600,
         true
     );
     renderer_.Init(main_window_->sdl_window());
@@ -87,6 +87,8 @@ void App::Update()
         window->Update();
     }
 
+    renderer_.Clear(Color::RED);
+
     for (auto& [id, component] : render_components_)
     {
         // TODO! make better later i cba rn
@@ -96,6 +98,8 @@ void App::Update()
 
         component->Draw(&this->renderer_);
     }
+
+    renderer_.Present();
 
     // spdlog::debug("{}, {}", GetMouse()->x_rel(), GetMouse()->y_rel());
     // main_window_->AlwaysFocused(true);
@@ -187,7 +191,7 @@ void App::HandleWindowEvents(u8 window_event)
 
             Geometry::Point new_center = Geometry::Rect::TopLeftToCenter(x, y, target_window->width(), target_window->height());
             target_window->transform.c = new_center;
-            spdlog::debug("{}, {}", x, y);
+            spdlog::debug("{}, {}", target_window->transform.w, target_window->transform.h);
         }
         break;
 

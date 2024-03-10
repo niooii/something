@@ -24,8 +24,18 @@ namespace Render
         // TODO! make everything in sight inline
         inline void Init(SDL_Window* window)
         {
-            renderer_interface->Init(window);
+            renderer_interface->SetWindow(window);
         };
+
+        inline void Clear(const Color& color)
+        {
+            renderer_interface->Clear(color);
+        }
+
+        inline void Present()
+        {
+            renderer_interface->Present();
+        }
 
         inline void DrawTest()
         {

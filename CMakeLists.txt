@@ -95,6 +95,8 @@ add_executable(horse main.cpp
         include/input/keyboard.cpp
         include/input/keyboard.h
         include/input/input.h
+        include/render/color.h
+        include/render/color.cpp
 )
 
 if (WIN32)

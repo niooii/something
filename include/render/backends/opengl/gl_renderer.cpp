@@ -9,9 +9,9 @@ namespace Render
     GlRenderer::GlRenderer()
     = default;
 
-    void GlRenderer::Init(SDL_Window* window)
+    void GlRenderer::SetWindow(SDL_Window* window)
     {
-        SDL_GL_CreateContext(window);
+        gl_context_.emplace(SDL_GL_CreateContext(window));
 
         if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
         {
@@ -19,15 +19,25 @@ namespace Render
             exit(-1);
         }
 
-
-
+        this->window_ = window;
     }
 
-    void GlRenderer::SetViewportSize(Vec2 size)
+    void GlRenderer::Clear(const Color& color)
+    {
+        glClearColor(color.r, color.g, color.b, color.a);
+        glClear(GL_COLOR_BUFFER_BIT);
+    }
+
+    void GlRenderer::Present()
+    {
+        SDL_GL_SwapWindow(window_);
+    }
+
+    void GlRenderer::SetViewportSize(const Vec2 size)
     {
     }
 
-    void GlRenderer::DrawRectangle(Rect rect)
+    void GlRenderer::DrawRectangle(const Rect rect)
     {
     }
 

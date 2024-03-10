@@ -37,14 +37,14 @@ namespace Geometry
 
         Point bottom_right_corner() const;
 
-        static Point TopLeftToCenter(f32 x, f32 y, f32 w, f32 h )
+        static Point TopLeftToCenter(f32 x, f32 y, f32 w, f32 h)
         {
-            return Point{x + w/2.f, y + w/2.f};
+            return Point{x + w/2.f, y + h/2.f};
         };
 
-        static Point TopLeftToCenter(Point& p, f32 w, f32 h )
+        static Point TopLeftToCenter(Point& p, f32 w, f32 h)
         {
-            return Point{p.x + w/2.f, p.y + w/2.f};
+            return Point{p.x + w/2.f, p.y + h/2.f};
         };
 
         bool contains_point(Point& point) const;

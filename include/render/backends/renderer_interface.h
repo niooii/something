@@ -10,6 +10,7 @@
 #include "math/vec2.h"
 
 #include "types.h"
+#include "render/color.h"
 
 namespace Render
 {
@@ -20,15 +21,16 @@ namespace Render
         SDL_Window* window_{nullptr};
 
     public:
-        // Constructor must initialize window pointer.
         explicit RendererInterface()
-        {
-        }
+        = default;
 
         // Inits renderer w the window pointer
-        virtual void Init(SDL_Window* window_) = 0;
+        // maybe just use the constructor for this man.
+        virtual void SetWindow(SDL_Window* window_) = 0;
 
         // Specific draw methods for each implemented backend type
+        virtual void Clear(const Color& color) = 0;
+        virtual void Present() = 0;
         virtual void SetViewportSize(Vec2 size) = 0;
         virtual void DrawRectangle(Rect rect) = 0;
         virtual void DrawText() = 0;
