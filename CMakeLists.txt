@@ -71,8 +71,6 @@ add_executable(horse main.cpp
         include/geometry/circle.h
         include/game/entity/player.cpp
         include/game/entity/player.h
-        include/math/vec2.cpp
-        include/math/vec2.h
         include/game/game.cpp
         include/game/game.h
         include/game/game_state.cpp
@@ -97,6 +95,8 @@ add_executable(horse main.cpp
         include/input/input.h
         include/render/color.h
         include/render/color.cpp
+        include/utils.cpp
+        include/utils.h
 )
 
 if (WIN32)
@@ -127,3 +127,11 @@ add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khr
 )
 include_directories(glad external/glad/include)
 target_link_libraries(horse glad)
+
+set(mathfu_build_benchmarks OFF CACHE BOOL "")
+set(mathfu_build_tests OFF CACHE BOOL "")
+add_subdirectory(external/mathfu mathfu)
+include_directories(external/mathfu/include)
+
+mathfu_configure_flags(horse)
+

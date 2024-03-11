@@ -9,6 +9,7 @@
 
 #include <glad/glad.h>
 #include "types.h"
+#include "mathfu/vector.h"
 
 namespace Render
 {
@@ -16,16 +17,24 @@ namespace Render
     {
     protected:
         std::optional<SDL_GLContext> gl_context_{};
+        u32 vao_quad_{};
+        u32 vbo_quad_{};
+        u32 ebo_quad_{};
+
+        void InitQuad();
 
     public:
-        GlRenderer();
+        GlRenderer(Window* window);
         // ~GlRenderer();
 
-        void SetWindow(SDL_Window* window) override;
+        // replace later its useless
+        void SetWindow(Window* window) override;
+
+        // draw functions
         void Clear(const Color& color) override;
         void Present() override;
-        void SetViewportSize(Vec2 size) override;
-        void DrawRectangle(Rect rect) override;
+        void SetViewportSize(mathfu::Vector<f32, 2> size) override;
+        void DrawRect(Rect rect) override;
         void DrawText() override;
     };
 } // Render

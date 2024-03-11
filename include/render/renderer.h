@@ -17,29 +17,24 @@ namespace Render
     protected:
         BackendType backend_type;
         RendererInterface* renderer_interface;
+        Window* active_window_;
 
     public:
-        explicit Renderer(BackendType backend_type_);
+        explicit Renderer(Window* window, BackendType backend_type_);
 
-        // TODO! make everything in sight inline
-        inline void Init(SDL_Window* window)
-        {
-            renderer_interface->SetWindow(window);
-        };
-
-        inline void Clear(const Color& color)
+        inline void Clear(const Color& color) const
         {
             renderer_interface->Clear(color);
         }
 
-        inline void Present()
+        inline void Present() const
         {
             renderer_interface->Present();
         }
 
-        inline void DrawTest()
+        inline void DrawTest() const
         {
-            renderer_interface->DrawRectangle(Rect{1, 1, 2});
+            renderer_interface->DrawRect(Rect{1, 1, 2});
         }
     };
 } // Render

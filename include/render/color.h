@@ -25,6 +25,7 @@ public:
     const static Color BLUE;
     const static Color WHITE;
     const static Color BLACK;
+    const static Color GREY;
 };
 
 #endif //COLOR_H

@@ -22,3 +22,4 @@ const Color Color::GREEN{0.f, 1.f, 0.f, 1.f};
 const Color Color::BLUE{0.f, 0.f, 1.f, 1.f};
 const Color Color::WHITE{1.f, 1.f, 1.f, 1.f};
 const Color Color::BLACK{0.f, 0.f, 0.f, 1.f};
+const Color Color::GREY{0.2f, 0.2f, 0.2f, 1.f};

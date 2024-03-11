@@ -1,8 +1,7 @@
 #include "app.h"
 
 App::App(Render::BackendType render_backend_type)
-    : render_backend_type_{render_backend_type},
-    renderer_{Render::Renderer{render_backend_type}}
+    : render_backend_type_{render_backend_type}
 {
 #ifdef WIN32
     SetProcessDPIAware();
@@ -16,7 +15,7 @@ App::App(Render::BackendType render_backend_type)
         600,
         true
     );
-    renderer_.Init(main_window_->sdl_window());
+    renderer_ = new Render::Renderer{main_window_, render_backend_type};
 }
 
 App::~App()
@@ -25,6 +24,7 @@ App::~App()
     {
         delete window;
     }
+    delete renderer_;
     SDL_Quit();
 }
 
@@ -61,7 +61,7 @@ bool App::DestroyWindow(u32 window_id)
 
 void App::DrawFrame()
 {
-    renderer_.DrawTest();
+    renderer_->DrawTest();
 }
 
 void App::Update()
@@ -87,7 +87,7 @@ void App::Update()
         window->Update();
     }
 
-    renderer_.Clear(Color::RED);
+    renderer_->Clear(Color::GREY);
 
     for (auto& [id, component] : render_components_)
     {
@@ -96,10 +96,12 @@ void App::Update()
         component->DoOnHold(delta_time_);
         component->DoOnRelease();
 
-        component->Draw(&this->renderer_);
+        component->Draw(renderer_);
     }
 
-    renderer_.Present();
+    renderer_->DrawTest();
+
+    renderer_->Present();
 
     // spdlog::debug("{}, {}", GetMouse()->x_rel(), GetMouse()->y_rel());
     // main_window_->AlwaysFocused(true);

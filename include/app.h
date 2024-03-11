@@ -29,11 +29,11 @@ protected:
     // Window and rendering
     std::map<u32, Render::RenderComponent*> render_components_;
     std::map<u32, Window*> windows_;
-    Window* main_window_;
+    Window* main_window_{nullptr};
 
     SDL_Event e_{};
     Render::BackendType render_backend_type_;
-    Render::Renderer renderer_;
+    Render::Renderer* renderer_{nullptr};
     float max_fps{999999};
 
     // Game

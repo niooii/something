@@ -6,13 +6,13 @@
 
 namespace Render
 {
-    Renderer::Renderer(BackendType backend_type_)
-        : backend_type(backend_type_)
+    Renderer::Renderer(Window* window, BackendType backend_type_)
+        : backend_type{backend_type_}, active_window_{window}
     {
         switch (backend_type)
         {
         case OPENGL:
-            renderer_interface = new GlRenderer{};
+            renderer_interface = new GlRenderer{window};
             break;
         case DIRECTX:
             throw std::runtime_error{"Not implemented! Exiting now..."};

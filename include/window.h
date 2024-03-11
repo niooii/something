@@ -13,7 +13,6 @@
 #include "types.h"
 #include "geometry/rect.h"
 #include "render/backends/backend_types.h"
-#include "render/backends/opengl/gl_renderer.h"
 
 // Window should not outlive RendererBackend
 class Window
