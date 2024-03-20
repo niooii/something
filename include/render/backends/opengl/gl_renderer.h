@@ -9,7 +9,6 @@
 
 #include <glad/glad.h>
 #include "types.h"
-#include "mathfu/vector.h"
 
 namespace Render
 {
@@ -33,7 +32,7 @@ namespace Render
         // draw functions
         void Clear(const Color& color) override;
         void Present() override;
-        void SetViewportSize(mathfu::Vector<f32, 2> size) override;
+        void SetViewportSize(Math::Vec2 size) override;
         void DrawRect(Rect rect) override;
         void DrawText() override;
     };

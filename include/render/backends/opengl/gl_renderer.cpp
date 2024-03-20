@@ -76,7 +76,7 @@ namespace Render
         SDL_GL_SwapWindow(window_->sdl_window());
     }
 
-    void GlRenderer::SetViewportSize(const mathfu::Vector<f32, 2> size)
+    void GlRenderer::SetViewportSize(const Math::Vec2    size)
     {
     }
 
