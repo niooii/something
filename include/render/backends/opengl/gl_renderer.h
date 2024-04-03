@@ -10,12 +10,20 @@
 #include <glad/glad.h>
 #include "types.h"
 
+// TODO! finish but i dont wanna write opengl man.,
 namespace Render
 {
     class GlRenderer : public RendererInterface
     {
     protected:
         std::optional<SDL_GLContext> gl_context_{};
+
+    public:
+        bool LoadShader(const char *unique_name, const char *file_path) override;
+
+        void UseShader(const char *name) override;
+
+    protected:
         u32 vao_quad_{};
         u32 vbo_quad_{};
         u32 ebo_quad_{};
@@ -33,8 +41,8 @@ namespace Render
         void Clear(const Color& color) override;
         void Present() override;
         void SetViewportSize(Math::Vec2 size) override;
-        void DrawRect(Rect rect) override;
-        void DrawText() override;
+        void DrawRect(Rect rect, Color color) override;
+        void DrawString(std::string text, Transform& screen_space_trasform) override;
     };
 } // Render
 

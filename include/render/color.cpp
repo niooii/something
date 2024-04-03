@@ -16,6 +16,17 @@ Color::Color(const f32 r, const f32 g, const f32 b, const f32 a) : r{r}, g{g}, b
 {
 }
 
+SDL_Color Color::to_sdl_color() const
+{
+    return
+    {
+        (Uint8)(r*255),
+        (Uint8)(g*255),
+        (Uint8)(b*255),
+        (Uint8)(a*255)
+    };
+}
+
 // const color declarations
 const Color Color::RED{1.f, 0.f, 0.f, 1.f};
 const Color Color::GREEN{0.f, 1.f, 0.f, 1.f};

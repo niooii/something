@@ -4,6 +4,8 @@
 
 #ifndef COLOR_H
 #define COLOR_H
+#include <SDL_pixels.h>
+
 #include "types.h"
 
 class Color
@@ -13,6 +15,8 @@ public:
     Color();
     Color(f32 r, f32 g, f32 b);
     Color(f32 r, f32 g, f32 b, f32 a);
+
+    SDL_Color to_sdl_color() const;
 
     // Attributes
     f32 r;

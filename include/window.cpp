@@ -21,6 +21,16 @@ Window::Window(const char* name, u32 x, u32 y, u16 w, u16 h, Render::BackendType
                     SDL_WINDOW_RESIZABLE |
                         SDL_WINDOW_ALLOW_HIGHDPI;
         break;
+    case Render::BackendType::SDL_GPU:
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+        window_creation_flags =
+            SDL_WINDOW_OPENGL |
+                SDL_WINDOW_SHOWN |
+                    SDL_WINDOW_RESIZABLE |
+                        SDL_WINDOW_ALLOW_HIGHDPI;
+        break;
     case Render::BackendType::DIRECTX:
         throw std::runtime_error{"Not implemented! Exiting now..."};
     case Render::BackendType::VULKAN:

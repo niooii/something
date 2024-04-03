@@ -10,6 +10,7 @@ namespace Render
     enum BackendType
     {
         OPENGL,
+        SDL_GPU,
         DIRECTX,
         VULKAN,
     };

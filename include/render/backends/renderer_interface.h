@@ -11,6 +11,7 @@
 
 #include "types.h"
 #include "window.h"
+#include "../../../shared/transform.h"
 #include "render/color.h"
 
 namespace Render
@@ -32,8 +33,16 @@ namespace Render
         virtual void Clear(const Color& color) = 0;
         virtual void Present() = 0;
         virtual void SetViewportSize(Vec2 size) = 0;
-        virtual void DrawRect(Rect rect) = 0;
-        virtual void DrawText() = 0;
+        virtual void DrawRect(Rect rect, Color color) = 0;
+        virtual void DrawString(std::string text, Transform& screen_space_trasform) = 0;
+
+        virtual void LoadTexture(std::string path, std::string id) = 0;
+        virtual void DrawTexture(std::string tex_id, Transform& screen_space_trasform) = 0;
+
+        // Other
+        // returns false if i/o error OR name already exists.
+        virtual bool LoadShader(const char* unique_name, const char* file_path) = 0;
+        virtual void UseShader(const char* name) = 0;
     };
 }
 

@@ -6,6 +6,16 @@
 
 namespace Render
 {
+    bool GlRenderer::LoadShader(const char *unique_name, const char *file_path)
+    {
+        return true;
+    }
+
+    void GlRenderer::UseShader(const char *name)
+    {
+
+    }
+
     // Private initialization stuff
     void GlRenderer::InitQuad()
     {
@@ -76,11 +86,11 @@ namespace Render
         SDL_GL_SwapWindow(window_->sdl_window());
     }
 
-    void GlRenderer::SetViewportSize(const Math::Vec2    size)
+    void GlRenderer::SetViewportSize(const Math::Vec2 size)
     {
     }
 
-    void GlRenderer::DrawRect(const Rect rect)
+    void GlRenderer::DrawRect(Rect rect, Color color)
     {
 
         glBindVertexArray(this->vao_quad_);
@@ -104,7 +114,7 @@ namespace Render
 
     }
 
-    void GlRenderer::DrawText()
+    void GlRenderer::DrawString(std::string text, Transform& screen_space_trasform)
     {
     }
 

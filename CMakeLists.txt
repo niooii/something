@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.27)
 project(horse)
 
 set(CMAKE_CXX_STANDARD 23)
 
 if(WIN32)
     set(SDL2_INSTALL "E:\\libs\\SDL2-2.30.0")
+    set(SDL2_gpu_INSTALL "E:\\libs\\SDL2_gpu-0.12.0")
     set(SDL2_image_INSTALL "E:\\libs\\SDL2_image-2.8.2")
     set(SDL2_mixer_INSTALL "E:\\libs\\SDL2_mixer-2.8.0")
     set(SDL2_ttf_INSTALL "E:\\libs\\SDL2_ttf-2.22.0")
@@ -29,8 +30,6 @@ if(NOT WIN32)
 endif ()
 
 find_package(spdlog REQUIRED)
-# manually get the include path for SDL_gpu
-
 # Include directories
 if(WIN32)
     include_directories(
@@ -42,6 +41,7 @@ if(WIN32)
             "${SDL2_net_INSTALL}\\include"
             "${SDL2_ttf_INSTALL}\\include"
             "${spdlog_INSTALL}\\include"
+            "${SDL2_gpu_INSTALL}\\include"
     )
 else ()
     include_directories(
@@ -98,8 +98,10 @@ add_executable(horse main.cpp
         include/utils.cpp
         include/utils.h
 )
-
+#set(ENV{PATH} "${SDL_gpu_INSTALL}\\SDL2_gpu\\release\\x64\\SDL2_gpu.dll")
 if (WIN32)
+    file(COPY "${SDL2_gpu_INSTALL}\\SDL2_gpu\\release\\x64\\SDL2_gpu.dll" DESTINATION "${CMAKE_BINARY_DIR}")
+    set(SDL2_GPU_LIBRARIES "${SDL2_gpu_INSTALL}\\SDL2_gpu\\release\\x64\\SDL2_gpu.lib")
     target_link_libraries(horse
         ${SDL2_LIBRARIES}
         ${SDL2_IMAGE_LIBRARIES}
@@ -107,6 +109,7 @@ if (WIN32)
         ${SDL2_NET_LIBRARIES}
         ${SDL2_TTF_LIBRARIES}
         ${spdlog_LIBRARIES}
+        ${SDL2_GPU_LIBRARIES}
     )
 else()
     target_link_libraries(horse
@@ -124,6 +127,8 @@ endif ()
 add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khrplatform.h external/glad/src/glad.c
         include/render/components/sprite_component.h
         shared/transform.h
+        include/render/backends/sdl_gpu/sdl_gpu_renderer.cpp
+        include/render/backends/sdl_gpu/sdl_gpu_renderer.h
 )
 include_directories(glad external/glad/include)
 target_link_libraries(horse glad)

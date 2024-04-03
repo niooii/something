@@ -34,7 +34,7 @@ namespace Render
 
         inline void DrawTest() const
         {
-            renderer_interface->DrawRect(Rect{1, 1, 2});
+            renderer_interface->DrawRect(Rect{1, 1, 2}, Color::GREY);
         }
     };
 } // Render

@@ -9,7 +9,7 @@
 
 int main(int argc, char* argv[]) {
     spdlog::set_level(spdlog::level::debug);
-    App app = App{Render::BackendType::OPENGL};
+    App app = App{Render::BackendType::SDL_GPU};
 
     while (!app.should_quit())
     {

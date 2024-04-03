@@ -87,7 +87,7 @@ void App::Update()
         window->Update();
     }
 
-    renderer_->Clear(Color::GREY);
+    renderer_->Clear(Color::WHITE);
 
     for (auto& [id, component] : render_components_)
     {
