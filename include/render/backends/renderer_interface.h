@@ -41,6 +41,7 @@ namespace Render
 
         // Other
         // returns false if i/o error OR name already exists.
+        //rust :((
         virtual bool LoadShader(const char* unique_name, const char* file_path) = 0;
         virtual void UseShader(const char* name) = 0;
     };

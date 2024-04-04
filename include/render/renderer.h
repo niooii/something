@@ -41,6 +41,8 @@ namespace Render
         {
             renderer_interface->SetViewportSize(size);
         }
+
+        // inline void LoadTexture()
     };
 } // Render
 
