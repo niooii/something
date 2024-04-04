@@ -129,6 +129,7 @@ add_library(glad external/glad/include/glad/glad.h external/glad/include/KHR/khr
         shared/transform.h
         include/render/backends/sdl_gpu/sdl_gpu_renderer.cpp
         include/render/backends/sdl_gpu/sdl_gpu_renderer.h
+        include/math/vec2.cpp
 )
 include_directories(glad external/glad/include)
 target_link_libraries(horse glad)

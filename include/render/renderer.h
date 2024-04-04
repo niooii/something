@@ -34,7 +34,12 @@ namespace Render
 
         inline void DrawTest() const
         {
-            renderer_interface->DrawRect(Rect{1, 1, 2}, Color::GREY);
+            renderer_interface->DrawRect(Rect{1, 1, 400}, Color::GREY);
+        }
+
+        inline void SetViewport(Vec2& size) const
+        {
+            renderer_interface->SetViewportSize(size);
         }
     };
 } // Render

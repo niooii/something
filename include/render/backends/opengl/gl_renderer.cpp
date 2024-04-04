@@ -54,6 +54,14 @@ namespace Render
         glBindVertexArray(0);
     }
 
+    void GlRenderer::LoadTexture(std::string path, std::string id)
+    {
+    }
+
+    void GlRenderer::DrawTexture(std::string tex_id, Transform& screen_space_trasform)
+    {
+    }
+
     // Constructor
     GlRenderer::GlRenderer(Window* window) : RendererInterface{window}
     {

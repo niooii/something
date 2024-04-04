@@ -11,8 +11,8 @@ namespace Render
         this->window_ = window;
 
         GPU_SetRequiredFeatures(GPU_FEATURE_BASIC_SHADERS);
-        GPU_SetInitWindow(SDL_GetWindowID(window_->sdl_window()));\
-        target_ = GPU_InitRenderer(GPU_RENDERER_OPENGL_1, window_->width(), window_->height(), GPU_DEFAULT_INIT_FLAGS);
+        GPU_SetInitWindow(SDL_GetWindowID(window_->sdl_window()));
+        target_ = GPU_InitRenderer(GPU_RENDERER_OPENGL_3, window_->width(), window_->height(), GPU_DEFAULT_INIT_FLAGS);
 
         if (target_->context->context == nullptr)
         {
@@ -37,7 +37,9 @@ namespace Render
 
     void SdlGpuRenderer::SetViewportSize(Vec2 size)
     {
-        GPU_SetViewport(target_, GPU_Rect{0, 0, size.x, size.y});
+        // GPU_SetViewport(target_, GPU_Rect{0, 0, size.x, size.y});
+        GPU_SetWindowResolution(size.x, size.y);
+        GPU_ResetProjection(target_);
     }
 
     void SdlGpuRenderer::DrawRect(Rect rect, Color color)
@@ -46,6 +48,14 @@ namespace Render
     }
 
     void SdlGpuRenderer::DrawString(std::string text, Transform& screen_space_trasform)
+    {
+    }
+
+    void SdlGpuRenderer::LoadTexture(std::string path, std::string id)
+    {
+    }
+
+    void SdlGpuRenderer::DrawTexture(std::string tex_id, Transform& screen_space_trasform)
     {
     }
 

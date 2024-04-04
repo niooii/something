@@ -31,6 +31,9 @@ namespace Render
         void InitQuad();
 
     public:
+        void LoadTexture(std::string path, std::string id) override;
+        void DrawTexture(std::string tex_id, Transform& screen_space_trasform) override;
+
         GlRenderer(Window* window);
         // ~GlRenderer();
 

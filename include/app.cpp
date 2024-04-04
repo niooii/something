@@ -12,7 +12,7 @@ App::App(Render::BackendType render_backend_type)
         800,
         800,
         800,
-        600,
+        200,
         true
     );
     renderer_ = new Render::Renderer{main_window_, render_backend_type};
@@ -182,6 +182,9 @@ void App::HandleWindowEvents(u8 window_event)
 
             Geometry::Point new_center = Geometry::Rect::TopLeftToCenter(x_, y_, w, h);
             target_window->transform.c = new_center;
+
+            Math::Vec2 size{(f32)w, (f32)h};
+            renderer_->SetViewport(size);
 
         }
         break;
